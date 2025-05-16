@@ -1,0 +1,21 @@
+{
+  "credential_issuer": "https://issuer.ageverification.dev",
+  "credential_endpoint": "https://issuer.ageverification.dev/credential",
+  "batch_credential_endpoint": "https://issuer.ageverification.dev/batch_credential",
+  "notification_endpoint": "https://issuer.ageverification.dev/notification",
+  "deferred_credential_endpoint": "https://issuer.ageverification.dev/deferred_credential",
+  "display": [
+    {
+    "name": "Age Verification Issuer",
+    "locale": "en",
+    "logo": {
+        "uri": "https://issuer.ageverification.dev/ic-logo.png",
+        "alt_text": "EU Digital Identity Wallet Logo"
+    }
+    }
+  ],
+  "credential_configurations_supported": {
+    
+
+  }
+}
