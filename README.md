@@ -1,18 +1,34 @@
+<!--
+SPDX-FileCopyrightText: 2025 European Commission
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
+![Proof of age attestations for all Europeans - An age verification solution for EU citizens and residents](images/top-banner-av.png)
+
+
 # Age Verification Issuer
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![License](https://img.shields.io/badge/License-Apache%202.0-green.svg?style=flat)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Last Commit](https://img.shields.io/github/last-commit/eu-digital-identity-wallet/av-app-android-wallet-ui?style=flat)](/../../commits)
+[![Open Issues](https://img.shields.io/github/issues/eu-digital-identity-wallet/av-app-android-wallet-ui?style=flat)](/../../issues)
 
 **Important!** Before you proceed, please read
-the [Age Verification Implementation project description]()
+the [Age Verification Solution Technical Specification](https://github.com/eu-digital-identity-wallet/av-doc-technical-specification)
 
 
 ### Overview
 
-The Age Verification Issuer is an implementation of a (Q)EAA Provider service, supporting the OpenId4VCI (draft 13) protocol. It is based on release 0.7.1 of the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). New features will be introduced in this implementation, which will later be ported back to the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py).
+The Age Verification (AV) Issuer is an implementation of a (Q)EAA Provider service, supporting the OpenId4VCI (draft 13) protocol (for the moment). It is based on release 0.7.1 of the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). New features will be introduced in this implementation, which will later be ported back to the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). 
+
+The AV Issuer profile will, in the next release, follow the OID4VCI specification for the Age Verification (AV) profile, as outlined in [Section 4.4 of Annex 4](https://github.com/eu-digital-identity-wallet/av-doc-technical-specification/blob/main/docs/annexes/annex-4/annex-4-av-profile.md#a44-openid-for-verifiable-credential-issuance).
 
 The service provides support for the `mso_mdoc` format of the "Proof of Age" attestation with the namespace “eu.europa.ec.agev10n”.
 
 For authenticating the user, it requires the use of eIDAS node, OAUTH2 server or a simple form (for testing purposes).
+
+You can use the Age Verification Issuer at https://issuer.ageverification.dev/, or install it locally (see [installation instructions](#1-installation))
+
 
 ### OpenId4VCI coverage
 
@@ -37,7 +53,7 @@ For authenticating the user, it requires the use of eIDAS node, OAUTH2 server or
 | Demonstrating Proof of Possession (DPoP)                          | ❌                                                              |
 | PKCE                                                              | ✅                                                              |
 
-## :heavy_exclamation_mark: Disclaimer
+##  Disclaimer
 
 This is an initial version of the software, developed solely for the purpose of demonstrating the business flow of the solution. It is not intended for production use, and does not yet include the full set of functional, security, or integration features required for a live deployment.
 
@@ -60,7 +76,7 @@ This version should be considered a foundational prototype to support early test
 
 ## 1. Installation
 
-You can use the Age Verification Issuer at https://issuer.ageverification.dev/, or install it locally.
+You can use the Age Verification Issuer at https://issuer.ageverification.dev/, or install it locally by following the instructions in this section.
 
 Pre-requisites:
 
@@ -107,20 +123,16 @@ Yes. Please see how in [Install Docker](install.md#6-docker).
 We welcome contributions to this project. To ensure that the process is smooth for everyone
 involved, follow the guidelines found in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-## License
+## Code of Conduct
 
-### License details
+This project has adopted the [Contributor Covenant](https://www.contributor-covenant.org/) in version 2.1 as our code of conduct. Please see the details in our [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md). All contributors must abide by the code of conduct.
 
-Copyright (c) 2025 European Commission
+By participating in this project, you agree to abide by its [Code of Conduct](CODE_OF_CONDUCT.md) at all times.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+## Licensing
 
-    http://www.apache.org/licenses/LICENSE-2.0
+Copyright (C) 2025 European Commission, Scytales, T-Systems International GmbH and all other contributors.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+This project follows the [REUSE standard for software licensing](https://reuse.software/). Each file contains copyright and license information, and license texts can be found in the [LICENSES](LICENSES) folder. For more information visit https://reuse.software/. You can find a guide for developers at https://telekom.github.io/reuse-template/.  
+
+Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the LICENSES folder.
