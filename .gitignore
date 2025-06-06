@@ -172,3 +172,7 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+app/app_config/config_secrets.py
+flask_session/
+nohup.out
