@@ -23,7 +23,7 @@ The Age Verification (AV) Issuer is an implementation of a (Q)EAA Provider servi
 
 The AV Issuer profile will, in the next release, follow the OID4VCI specification for the Age Verification (AV) profile, as outlined in [Section 4.4 of Annex 4](https://github.com/eu-digital-identity-wallet/av-doc-technical-specification/blob/main/docs/annexes/annex-4/annex-4-av-profile.md#a44-openid-for-verifiable-credential-issuance).
 
-The service provides support for the `mso_mdoc` format of the "Proof of Age" attestation with the namespace “eu.europa.ec.agev10n”.
+The service provides support for the `mso_mdoc` format of the "Proof of Age" attestation with the namespace “eu.europa.ec.av.1”.
 
 For authenticating the user, it requires the use of eIDAS node, OAUTH2 server or a simple form (for testing purposes).
 

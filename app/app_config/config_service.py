@@ -99,12 +99,12 @@ class ConfService:
     }
 
     config_doctype = {
-        "eu.europa.ec.agev10n": {
+        "eu.europa.ec.av.1": {
             "issuing_authority": "Test QEAA issuer",
             "organization_id": "Age Verification Implementation",
             "validity": qeaa_validity,
             "organization_name": "Test QEAA issuer",
-            "namespace": "eu.europa.ec.agev10n",
+            "namespace": "eu.europa.ec.av.1",
         },
     }
 

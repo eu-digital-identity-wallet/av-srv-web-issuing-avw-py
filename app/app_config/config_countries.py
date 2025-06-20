@@ -53,7 +53,7 @@ class ConfCountries:
                 "url": "https://preprod.autenticacao.gov.pt/oauth/askauthorization?",
                 "redirect_uri": cfgserv.service_url + "dynamic/redirect",
                 "scope": {
-                    "eu.europa.ec.agev10n": {
+                    "eu.europa.ec.av.1": {
                         #"given_name": "http://interop.gov.pt/MDC/Cidadao/NomeProprio",
                         #"family_name": "http://interop.gov.pt/MDC/Cidadao/NomeApelido",
                         "birth_date": "http://interop.gov.pt/MDC/Cidadao/DataNascimento",

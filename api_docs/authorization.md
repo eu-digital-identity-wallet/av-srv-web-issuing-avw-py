@@ -32,7 +32,7 @@ The following parameters are supported:
 
     Payload:
   
-      response_type=code&state=af0ifjsldkj&client_id=ID&redirect_uri=...&code_challenge=-ciaVij0VMswVfqm3_GK758-_dAI0E9i97hu1SAOiFQ&code_challenge_method=S256&scope=eu.europa.ec.agev10n openid&authorization_details=[{"type": "openid_credential", "credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"}]
+      response_type=code&state=af0ifjsldkj&client_id=ID&redirect_uri=...&code_challenge=-ciaVij0VMswVfqm3_GK758-_dAI0E9i97hu1SAOiFQ&code_challenge_method=S256&scope=eu.europa.ec.eudi.age_verification_mdoc openid&authorization_details=[{"type": "openid_credential", "credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"}]
 
 
 Response:
@@ -64,7 +64,7 @@ The following parameters are supported:
 
     Payload:
   
-      response_type=code&state=af0ifjsldkj&client_id=ID&redirect_uri=...&scope= eu.europa.ec.agev10n openid&authorization_details=[{"type": "openid_credential", "credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"}]
+      response_type=code&state=af0ifjsldkj&client_id=ID&redirect_uri=...&scope=eu.europa.ec.eudi.age_verification_mdoc  openid&authorization_details=[{"type": "openid_credential", "credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"}]
 
 
 Response:
@@ -108,7 +108,7 @@ The following parameters are supported:
 
 **Example:**
   
-      https://issuer.ageverification.dev/authorizationV3?response_type=code&client_id=ID&redirect_uri=...&scope=eu.europa.ec.agev10n&code_challenge_method=S256&code_challenge=-ciaVij0VMswVfqm3_GK758-_dAI0E9i97hu1SAOiFQ&authorization_details=[{"type": "openid_credential","credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"},{"type": "openid_credential","credential_configuration_id":"eu.europa.ec.eudi.age_verification_mdoc"}]
+      https://issuer.ageverification.dev/authorizationV3?response_type=code&client_id=ID&redirect_uri=...&scope=eu.europa.ec.eudi.age_verification_mdoc&code_challenge_method=S256&code_challenge=-ciaVij0VMswVfqm3_GK758-_dAI0E9i97hu1SAOiFQ&authorization_details=[{"type": "openid_credential","credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"},{"type": "openid_credential","credential_configuration_id":"eu.europa.ec.eudi.age_verification_mdoc"}]
 
 At the end of user authentication, the following parameters are returned:
 
@@ -132,7 +132,7 @@ The following parameters are supported:
 
 **Example:**
   
-      https://issuer.ageverification.dev/authorizationV3?response_type=code&client_id=ID&redirect_uri=...&scope=eu.europa.ec.agev10n&authorization_details=[{"type": "openid_credential","credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"},{"type": "openid_credential","credential_configuration_id":"eu.europa.ec.eudi.age_verification_mdoc"}]
+      https://issuer.ageverification.dev/authorizationV3?response_type=code&client_id=ID&redirect_uri=...&scope=eu.europa.ec.eudi.age_verification_mdoc&authorization_details=[{"type": "openid_credential","credential_configuration_id": "eu.europa.ec.eudi.age_verification_mdoc"},{"type": "openid_credential","credential_configuration_id":"eu.europa.ec.eudi.age_verification_mdoc"}]
 
 At the end of user authentication, the following parameters are returned:
 
