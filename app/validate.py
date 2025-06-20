@@ -163,6 +163,20 @@ def validate_params_getpid_or_mdl(args, list):
             "Error 12: " + cfgserv.error_list["12"] + "\n",
             status.HTTP_400_BAD_REQUEST,
         )
+    # if version not supported
+    if args.get("version") not in cfgserv.getpid_or_mdl_response_field.keys():
+        cfgserv.app_logger.warning(
+            " - WARN - "
+            + session["route"]
+            + " - "
+            + session["device_publickey"]
+            + " - "
+            + cfgserv.error_list["13"]
+        )
+        return (
+            "Error 13: " + cfgserv.error_list["13"] + "\n",
+            status.HTTP_400_BAD_REQUEST,
+        )
     # if country not supported
     if (
         not "country" in l
