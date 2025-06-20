@@ -61,6 +61,9 @@ class ConfService:
     # eIDAS node Age Verification attributes
     eidasnode_attributes = ["DateOfBirth"]
 
+    #Nonce endpoint
+    nonce_key = "/etc/eudiw/pid-issuer/privKey/nonce_rsa4096.pem"
+
     # ------------------------------------------------------------------------------------------------
     # OpenID endpoints
 
