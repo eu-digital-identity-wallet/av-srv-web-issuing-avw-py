@@ -1,7 +1,7 @@
 {
   "eu.europa.ec.eudi.age_verification_mdoc":{
      "format":"mso_mdoc",
-     "doctype":"eu.europa.ec.agev10n",
+     "doctype":"eu.europa.ec.av.1",
      "scope":"eu.europa.ec.eudi.age_verification_mdoc",
      "cryptographic_binding_methods_supported":[
         "jwk",
@@ -30,7 +30,7 @@
      "claims":[
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_18"
            ],
            "mandatory":true,
@@ -45,7 +45,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_13"
            ],
            "mandatory":false,
@@ -60,7 +60,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_15"
            ],
            "mandatory":false,
@@ -75,7 +75,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_16"
            ],
            "mandatory":false,
@@ -90,7 +90,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_21"
            ],
            "mandatory":false,
@@ -105,7 +105,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_23"
            ],
            "mandatory":false,
@@ -120,7 +120,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_25"
            ],
            "mandatory":false,
@@ -135,7 +135,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_27"
            ],
            "mandatory":false,
@@ -150,7 +150,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_28"
            ],
            "mandatory":false,
@@ -165,7 +165,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_40"
            ],
            "mandatory":false,
@@ -180,7 +180,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_60"
            ],
            "mandatory":false,
@@ -195,7 +195,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_65"
            ],
            "mandatory":false,
@@ -210,7 +210,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "age_over_67"
            ],
            "mandatory":false,
@@ -225,7 +225,7 @@
         },
         {
            "path":[
-              "eu.europa.ec.agev10n",
+              "eu.europa.ec.av.1",
               "portrait"
            ],
            "mandatory":false,
@@ -237,76 +237,6 @@
                  "locale":"en"
               }
            ]
-        },
-        {
-           "path":[
-              "eu.europa.ec.agev10n",
-              "issuance_date"
-           ],
-           "mandatory":true,
-           "source":"issuer",
-           "display":[
-              {
-                 "name":"Issuance Date",
-                 "locale":"en"
-              }
-           ]
-        },
-        {
-           "path":[
-              "eu.europa.ec.agev10n",
-              "expiry_date"
-           ],
-           "mandatory":true,
-           "source":"issuer",
-           "display":[
-              {
-                 "name":"Expiry Date",
-                 "locale":"en"
-              }
-           ]
-        },
-        {
-           "path":[
-              "eu.europa.ec.agev10n",
-              "issuing_country"
-           ],
-           "mandatory":true,
-           "source":"issuer",
-           "display":[
-              {
-                 "name":"Issuing Country",
-                 "locale":"en"
-              }
-           ]
-        },
-        {
-           "path":[
-              "eu.europa.ec.agev10n",
-              "issuing_authority"
-           ],
-           "mandatory":true,
-           "source":"issuer",
-           "display":[
-              {
-                 "name":"Issuing Authority",
-                 "locale":"en"
-              }
-           ]
-        },
-        {
-           "path":[
-              "eu.europa.ec.agev10n",
-              "issuing_jurisdiction"
-           ],
-           "mandatory":true,
-           "source":"user",
-           "display":[
-              {
-                 "name":"Issuing Jurisdiction",
-                 "locale":"en"
-              }
-           ]
         }
      ],
      "issuer_config":{
@@ -314,7 +244,7 @@
         "organization_id":"Age Verification Implementation",
         "validity":90,
         "organization_name":"Test PID issuer",
-        "namespace":"eu.europa.ec.agev10n"
+        "namespace":"eu.europa.ec.av.1"
      }
   }
 }
