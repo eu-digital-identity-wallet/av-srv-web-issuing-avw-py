@@ -15,3 +15,5 @@ and this project adheres to [Semantic Versioning](https://semverdoc.org/).
 + Upgraded to release 0.8.0 of the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py).
 
 + Updated max batch size to 30
+
++ Proof of age doctype and attributes
