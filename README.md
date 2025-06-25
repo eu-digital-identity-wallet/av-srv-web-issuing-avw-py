@@ -52,8 +52,8 @@ You can use the Age Verification Issuer at https://issuer.ageverification.dev/, 
 | PKCE                                                              | ✅                                                              |
 
 
-The following is the coverage according to the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/)
 ### AV profile coverage
+The following is the coverage according to the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/)
 
 | Feature                                                   | Coverage                                                        |
 |-------------------------------------------------------------------|-----------------------------------------------------------------|
