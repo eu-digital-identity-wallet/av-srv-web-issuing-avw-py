@@ -36,7 +36,6 @@ You can use the Age Verification Issuer at https://issuer.ageverification.dev/, 
 |-------------------------------------------------------------------|-----------------------------------------------------------------|
 | [Authorization Code flow](api_docs/authorization.md)              | ✅ Support for credential configuration id, scope               |
 | [Pre-authorized code flow](api_docs/pre-authorized.md)            | ✅                                                              |
-| [Credential Offer](api_docs/credential_offer.md)                  | ✅ `authorization_code` , ✅ `pre-authorized_code`              |
 | Dynamic Credential Request                                        | ✅                                                              |
 | mso_mdoc format                                                   | ✅                                                              |
 | [Token Endpoint](api_docs/token.md)                               | ✅ (scope only)                                                              |
@@ -50,6 +49,21 @@ You can use the Age Verification Issuer at https://issuer.ageverification.dev/, 
 | Pushed authorization request                                      | ✅                                                              |
 | Wallet authentication                                             | ✅ public client                                                |
 | Demonstrating Proof of Possession (DPoP)                          | ❌                                                              |
+| PKCE                                                              | ✅                                                              |
+
+
+The following is the coverage according to the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/)
+### AV profile coverage
+
+| Feature                                                   | Coverage                                                        |
+|-------------------------------------------------------------------|-----------------------------------------------------------------|
+| [Authorization Code flow](api_docs/authorization.md)              | ✅ scope               |
+| mso_mdoc format                                                   | ✅                                                              |
+| [Token Endpoint](api_docs/token.md)                               | ✅ (scope only)                                                              |
+| [Credential Endpoint](api_docs/credential.md)                     | ✅ Including proofs and repeatable invocations                  |
+| Credential Issuer MetaData                                        | ✅ Unsigned metadata                                            | 
+| Proof                                                             | ✅ JWT                                                  |
+| Wallet authentication                                             | ✅ public client                                                |
 | PKCE                                                              | ✅                                                              |
 
 ##  Disclaimer
@@ -104,15 +118,11 @@ See more information in [api_docs/configuration.md](api_docs/configuration.md#1-
 
 Yes. Please follow the instructions in [api_docs/configuration.md](api_docs/configuration.md#2-configuration-of-countries). If you don't have Document Signer private key and certificate, we provide  test private DS keys and certificates, for country AgeVerification (AV).
 
-### E. How can I create a credential offer to issue a credential?
-
-Please see detailed instructions in [api_docs/credential_offer.md](api_docs/credential_offer.md).
-
-### F. Can I test the pre-authorized flow?
+### E. Can I test the pre-authorized flow?
 
 Yes. Please see how in [api_docs/pre-authorized.md](api_docs/pre-authorized.md).
 
-### H. Can I run the issuer in a Docker container?
+### F. Can I run the issuer in a Docker container?
 
 Yes. Please see how in [Install Docker](install.md#6-docker).
 
