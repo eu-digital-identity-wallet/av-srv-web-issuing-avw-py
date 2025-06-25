@@ -19,9 +19,8 @@ the [Age Verification Solution Technical Specification](https://github.com/eu-di
 
 ### Overview
 
-The Age Verification (AV) Issuer is an implementation of a (Q)EAA Provider service, supporting the [Age Verification Profile](https://docs.ageverification.dev/Technical%20Specification/annexes/annex-4/annex-4-av-profile/). It is based on release 0.8.0 of the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). New features will be introduced in this implementation, which will later be ported back to the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). 
+The Age Verification (AV) Issuer is an implementation of a (Q)EAA Provider service, following the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/). It is based on release 0.8.0 of the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). New features will be introduced in this implementation, which will later be ported back to the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). 
 
-The AV Issuer profile will, in the next release, follow the OID4VCI specification for the Age Verification (AV) profile, as outlined in [Section 4.4 of Annex 4](https://github.com/eu-digital-identity-wallet/av-doc-technical-specification/blob/main/docs/annexes/annex-4/annex-4-av-profile.md#a44-openid-for-verifiable-credential-issuance).
 
 The service provides support for the `mso_mdoc` format of the "Proof of Age" attestation with the namespace “eu.europa.ec.av.1”.
 

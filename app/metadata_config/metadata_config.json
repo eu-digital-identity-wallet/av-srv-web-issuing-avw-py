@@ -1,4 +1,9 @@
 {
+  "credential_issuer": "https://issuer.ageverification.dev",
+  "credential_endpoint": "https://issuer.ageverification.dev/credential",
+  "notification_endpoint": "https://issuer.ageverification.dev/notification",
+  "deferred_credential_endpoint": "https://issuer.ageverification.dev/deferred_credential",
+  "nonce_endpoint":"https://issuer.ageverification.dev/nonce",
   "batch_credential_issuance": {
       "batch_size": 30
     },
