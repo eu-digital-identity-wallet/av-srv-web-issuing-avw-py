@@ -27,30 +27,25 @@ The service provides support for the `mso_mdoc` format of the "Proof of Age" att
 For authenticating the user, it requires the use of eIDAS node, OAUTH2 server or a simple form (for testing purposes).
 
 You can use the Age Verification Issuer at https://issuer.ageverification.dev/, or install it locally (see [installation instructions](#1-installation))
+                                                      |
 
 
-### OpenId4VCI coverage
+### AV profile coverage
+The following is the coverage according to the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/).
 
 
 | Feature                                                   | Coverage                                                        |
 |-------------------------------------------------------------------|-----------------------------------------------------------------|
-| [Authorization Code flow](api_docs/authorization.md)              | ✅ Support for credential configuration id, scope               |
-| [Pre-authorized code flow](api_docs/pre-authorized.md)            | ✅                                                              |
-| [Credential Offer](api_docs/credential_offer.md)                  | ✅ `authorization_code` , ✅ `pre-authorized_code`              |
-| Dynamic Credential Request                                        | ✅                                                              |
+| [Authorization Code flow](api_docs/authorization.md)              | ✅ scope               |
 | mso_mdoc format                                                   | ✅                                                              |
 | [Token Endpoint](api_docs/token.md)                               | ✅ (scope only)                                                              |
 | [Credential Endpoint](api_docs/credential.md)                     | ✅ Including proofs and repeatable invocations                  |
 | Credential Issuer MetaData                                        | ✅ Unsigned metadata                                            | 
-| [Nonce endpoint](api_docs/nonce_endpoint.md)                    | ✅                                                             |
-| [Deferred Endpoint](api_docs/deferred.md)                         | ✅                                                              |
 | Proof                                                             | ✅ JWT                                                  |
-| Credential response encryption                                    | ✅                                                               |
-| [Notification Endpoint](api_docs/notification.md)                 | ✅                                                              |
-| Pushed authorization request                                      | ✅                                                              |
-| Wallet authentication                                             | ✅ public client                                                |
-| Demonstrating Proof of Possession (DPoP)                          | ❌                                                              |
 | PKCE                                                              | ✅                                                              |
+
+
+Additional coverage can be found at [OpenId4VCI coverage](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py#openid4vci-coverage).
 
 ##  Disclaimer
 
@@ -104,15 +99,11 @@ See more information in [api_docs/configuration.md](api_docs/configuration.md#1-
 
 Yes. Please follow the instructions in [api_docs/configuration.md](api_docs/configuration.md#2-configuration-of-countries). If you don't have Document Signer private key and certificate, we provide  test private DS keys and certificates, for country AgeVerification (AV).
 
-### E. How can I create a credential offer to issue a credential?
-
-Please see detailed instructions in [api_docs/credential_offer.md](api_docs/credential_offer.md).
-
-### F. Can I test the pre-authorized flow?
+### E. Can I test the pre-authorized flow?
 
 Yes. Please see how in [api_docs/pre-authorized.md](api_docs/pre-authorized.md).
 
-### H. Can I run the issuer in a Docker container?
+### F. Can I run the issuer in a Docker container?
 
 Yes. Please see how in [Install Docker](install.md#6-docker).
 
