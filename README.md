@@ -27,33 +27,12 @@ The service provides support for the `mso_mdoc` format of the "Proof of Age" att
 For authenticating the user, it requires the use of eIDAS node, OAUTH2 server or a simple form (for testing purposes).
 
 You can use the Age Verification Issuer at https://issuer.ageverification.dev/, or install it locally (see [installation instructions](#1-installation))
-
-
-### OpenId4VCI coverage
-
-
-| Feature                                                   | Coverage                                                        |
-|-------------------------------------------------------------------|-----------------------------------------------------------------|
-| [Authorization Code flow](api_docs/authorization.md)              | ✅ Support for credential configuration id, scope               |
-| [Pre-authorized code flow](api_docs/pre-authorized.md)            | ✅                                                              |
-| Dynamic Credential Request                                        | ✅                                                              |
-| mso_mdoc format                                                   | ✅                                                              |
-| [Token Endpoint](api_docs/token.md)                               | ✅ (scope only)                                                              |
-| [Credential Endpoint](api_docs/credential.md)                     | ✅ Including proofs and repeatable invocations                  |
-| Credential Issuer MetaData                                        | ✅ Unsigned metadata                                            | 
-| [Nonce endpoint](api_docs/nonce_endpoint.md)                    | ✅                                                             |
-| [Deferred Endpoint](api_docs/deferred.md)                         | ✅                                                              |
-| Proof                                                             | ✅ JWT                                                  |
-| Credential response encryption                                    | ✅                                                               |
-| [Notification Endpoint](api_docs/notification.md)                 | ✅                                                              |
-| Pushed authorization request                                      | ✅                                                              |
-| Wallet authentication                                             | ✅ public client                                                |
-| Demonstrating Proof of Possession (DPoP)                          | ❌                                                              |
-| PKCE                                                              | ✅                                                              |
+                                                      |
 
 
 ### AV profile coverage
-The following is the coverage according to the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/)
+The following is the coverage according to the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/).
+
 
 | Feature                                                   | Coverage                                                        |
 |-------------------------------------------------------------------|-----------------------------------------------------------------|
@@ -64,6 +43,9 @@ The following is the coverage according to the [Age Verification Specification](
 | Credential Issuer MetaData                                        | ✅ Unsigned metadata                                            | 
 | Proof                                                             | ✅ JWT                                                  |
 | PKCE                                                              | ✅                                                              |
+
+
+Additional coverage can be found at [OpenId4VCI coverage](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py#openid4vci-coverage).
 
 ##  Disclaimer
 
