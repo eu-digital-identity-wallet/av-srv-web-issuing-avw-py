@@ -63,7 +63,6 @@ The following is the coverage according to the [Age Verification Specification](
 | [Credential Endpoint](api_docs/credential.md)                     | ✅ Including proofs and repeatable invocations                  |
 | Credential Issuer MetaData                                        | ✅ Unsigned metadata                                            | 
 | Proof                                                             | ✅ JWT                                                  |
-| Wallet authentication                                             | ✅ public client                                                |
 | PKCE                                                              | ✅                                                              |
 
 ##  Disclaimer
