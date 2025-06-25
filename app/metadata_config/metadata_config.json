@@ -1,9 +1,29 @@
 {
   "credential_issuer": "https://issuer.ageverification.dev",
   "credential_endpoint": "https://issuer.ageverification.dev/credential",
-  "batch_credential_endpoint": "https://issuer.ageverification.dev/batch_credential",
   "notification_endpoint": "https://issuer.ageverification.dev/notification",
   "deferred_credential_endpoint": "https://issuer.ageverification.dev/deferred_credential",
+  "nonce_endpoint":"https://issuer.ageverification.dev/nonce",
+  "batch_credential_issuance": {
+      "batch_size": 30
+    },
+  "credential_response_encryption": {
+    "alg_values_supported": [
+      "RSA1_5",
+      "RSA-OAEP",
+      "RSA-OAEP-256",
+      "ECDH-ES"
+    ],
+    "enc_values_supported": [
+      "A128CBC-HS256",
+      "A192CBC-HS384",
+      "A256CBC-HS512",
+      "A128GCM",
+      "A192GCM",
+      "A256GCM"
+    ],
+    "encryption_required": false
+  },
   "display": [
     {
     "name": "Age Verification Issuer",

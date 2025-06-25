@@ -19,11 +19,10 @@ the [Age Verification Solution Technical Specification](https://github.com/eu-di
 
 ### Overview
 
-The Age Verification (AV) Issuer is an implementation of a (Q)EAA Provider service, supporting the OpenId4VCI (draft 13) protocol (for the moment). It is based on release 0.7.1 of the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). New features will be introduced in this implementation, which will later be ported back to the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). 
+The Age Verification (AV) Issuer is an implementation of a (Q)EAA Provider service, following the [Age Verification Specification](https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/). It is based on release 0.8.0 of the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). New features will be introduced in this implementation, which will later be ported back to the [EUDI Issuer](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py). 
 
-The AV Issuer profile will, in the next release, follow the OID4VCI specification for the Age Verification (AV) profile, as outlined in [Section 4.4 of Annex 4](https://github.com/eu-digital-identity-wallet/av-doc-technical-specification/blob/main/docs/annexes/annex-4/annex-4-av-profile.md#a44-openid-for-verifiable-credential-issuance).
 
-The service provides support for the `mso_mdoc` format of the "Proof of Age" attestation with the namespace “eu.europa.ec.agev10n”.
+The service provides support for the `mso_mdoc` format of the "Proof of Age" attestation with the namespace “eu.europa.ec.av.1”.
 
 For authenticating the user, it requires the use of eIDAS node, OAUTH2 server or a simple form (for testing purposes).
 
@@ -40,13 +39,13 @@ You can use the Age Verification Issuer at https://issuer.ageverification.dev/, 
 | [Credential Offer](api_docs/credential_offer.md)                  | ✅ `authorization_code` , ✅ `pre-authorized_code`              |
 | Dynamic Credential Request                                        | ✅                                                              |
 | mso_mdoc format                                                   | ✅                                                              |
-| [Token Endpoint](api_docs/token.md)                               | ✅                                                              |
+| [Token Endpoint](api_docs/token.md)                               | ✅ (scope only)                                                              |
 | [Credential Endpoint](api_docs/credential.md)                     | ✅ Including proofs and repeatable invocations                  |
 | Credential Issuer MetaData                                        | ✅ Unsigned metadata                                            | 
-| [Batch Endpoint](api_docs/batch_credential.md)                    | ✅                                                              | 
+| [Nonce endpoint](api_docs/nonce_endpoint.md)                    | ✅                                                             |
 | [Deferred Endpoint](api_docs/deferred.md)                         | ✅                                                              |
-| Proof                                                             | ✅ JWT, ✅ CWT                                                  |
-| Credential response encryption                                    | ❌                                                              |
+| Proof                                                             | ✅ JWT                                                  |
+| Credential response encryption                                    | ✅                                                               |
 | [Notification Endpoint](api_docs/notification.md)                 | ✅                                                              |
 | Pushed authorization request                                      | ✅                                                              |
 | Wallet authentication                                             | ✅ public client                                                |
@@ -58,7 +57,6 @@ You can use the Age Verification Issuer at https://issuer.ageverification.dev/, 
 This is an initial version of the software, developed solely for the purpose of demonstrating the business flow of the solution. It is not intended for production use, and does not yet include the full set of functional, security, or integration features required for a live deployment.
 
 The current release provides only basic functionality, with several key features to be introduced in future versions, including:
- - Support for batch issuing
  - App and device verification based on Google Play Integrity API and Apple App Attestation
  - Additional issuance methods beyond the currently implemented eID based method. 
 
