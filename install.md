@@ -28,7 +28,7 @@ To run the AV Issuer, please follow these simple steps (some of which may have a
 1. Clone the AV Issuer repository:
 
     ```shell
-    git clone TBD
+    git clone git@github.com:eu-digital-identity-wallet/av-srv-web-issuing-avw-py.git
     ```
 
 2. Create a `.venv` folder within the cloned repository:

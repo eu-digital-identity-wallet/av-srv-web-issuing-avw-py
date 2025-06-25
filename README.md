@@ -57,7 +57,6 @@ You can use the Age Verification Issuer at https://issuer.ageverification.dev/, 
 This is an initial version of the software, developed solely for the purpose of demonstrating the business flow of the solution. It is not intended for production use, and does not yet include the full set of functional, security, or integration features required for a live deployment.
 
 The current release provides only basic functionality, with several key features to be introduced in future versions, including:
- - Support for batch issuing
  - App and device verification based on Google Play Integrity API and Apple App Attestation
  - Additional issuance methods beyond the currently implemented eID based method. 
 
