@@ -18,8 +18,10 @@ and this project adheres to [Semantic Versioning](https://semverdoc.org/).
 
 + Proof of age doctype and attributes
 
-+ Updated IACA certificate
+## [0.2.1]
 
+### Changed
++ Updated IACA certificate
 
 ### Fixes
 + Fix oauth2 metadata
