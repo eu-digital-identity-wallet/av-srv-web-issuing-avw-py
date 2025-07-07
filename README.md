@@ -99,20 +99,15 @@ See more information in [api_docs/configuration.md](api_docs/configuration.md#1-
 
 Yes. Please follow the instructions in [api_docs/configuration.md](api_docs/configuration.md#2-configuration-of-countries). If you don't have Document Signer private key and certificate, we provide  test private DS keys and certificates, for country AgeVerification (AV).
 
-
-### D. How can I create a credential offer to issue a credential?
-
-Please see detailed instructions in [api_docs/credential_offer.md](api_docs/credential_offer.md).
-
-### E. Can I test the pre-authorized flow?
+### D. Can I test the pre-authorized flow?
 
 Yes. Please see how in [api_docs/pre-authorized.md](api_docs/pre-authorized.md).
 
-### F. Can I run the issuer in a Docker container?
+### E. Can I run the issuer in a Docker container?
 
 Yes. Please see how in [Install Docker](install.md#6-docker).
 
-### G. Where can I find the IACA certificate?
+### F. Where can I find the IACA certificate?
 The IACA included in a trusted list can be found at [api_docs/test_tokens/IACA-token/AgeVerificationIssuer.IACA.01.EU.pem](api_docs/test_tokens/IACA-token/AgeVerificationIssuer.IACA.01.EU.pem)
 
 
