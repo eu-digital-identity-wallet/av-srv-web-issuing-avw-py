@@ -118,7 +118,7 @@ Yes. Please see how in [api_docs/pre-authorized.md](api_docs/pre-authorized.md).
 
 Yes. Please see how in [Install Docker](install.md#6-docker).
 
-### H. Where can I find the IACA certificate?
+### G. Where can I find the IACA certificate?
 The IACA included in a trusted list can be found at [api_docs/test_tokens/IACA-token/AgeVerificationIssuer.IACA.01.EU.pem](api_docs/test_tokens/IACA-token/AgeVerificationIssuer.IACA.01.EU.pem)
 
 
