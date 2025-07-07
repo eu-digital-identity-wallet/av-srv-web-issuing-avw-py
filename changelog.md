@@ -17,3 +17,11 @@ and this project adheres to [Semantic Versioning](https://semverdoc.org/).
 + Updated max batch size to 30
 
 + Proof of age doctype and attributes
+
++ Updated IACA certificate
+
+
+### Fixes
++ Fix oauth2 metadata
+
++ State echo bug in authorization endpoint
