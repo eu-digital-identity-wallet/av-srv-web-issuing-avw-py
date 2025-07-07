@@ -89,15 +89,20 @@ Click [here](install.md) for detailed instructions.
 
 Please see detailed instructions on how to make your [local AV Issuer available on the Internet install.md](install.md#5-make-your-local-av-issuer-available-on-the-internet-optional), and on how to get a [free HTTPS certificate]([ll](https://github.com/T-Scy/av-srv-web-issuing-avw-py/blob/main/install.md#52-install-and-run-certbot-to-gef-a-free-https-certificate)).
 
-### C. Can I use my IACA certificate with the Age Verification Issuer?
+### B. Can I use my IACA certificate with the Age Verification Issuer?
 
 Yes. You must copy your IACA trusted certificate(s) (in PEM format) to the `trusted_CAs_path` folder. If you don't have an IACA certificate, we provide an example test IACA certificate for the country AgeVerification (AV).
 
 See more information in [api_docs/configuration.md](api_docs/configuration.md#1-service-configuration).
 
-### D. Can I use my Document Signer private key and certificate with the Age Verification Issuer?
+### C. Can I use my Document Signer private key and certificate with the Age Verification Issuer?
 
 Yes. Please follow the instructions in [api_docs/configuration.md](api_docs/configuration.md#2-configuration-of-countries). If you don't have Document Signer private key and certificate, we provide  test private DS keys and certificates, for country AgeVerification (AV).
+
+
+### D. How can I create a credential offer to issue a credential?
+
+Please see detailed instructions in [api_docs/credential_offer.md](api_docs/credential_offer.md).
 
 ### E. Can I test the pre-authorized flow?
 
@@ -106,6 +111,10 @@ Yes. Please see how in [api_docs/pre-authorized.md](api_docs/pre-authorized.md).
 ### F. Can I run the issuer in a Docker container?
 
 Yes. Please see how in [Install Docker](install.md#6-docker).
+
+### G. Where can I find the IACA certificate?
+The IACA included in a trusted list can be found at [api_docs/test_tokens/IACA-token/AgeVerificationIssuer.IACA.01.EU.pem](api_docs/test_tokens/IACA-token/AgeVerificationIssuer.IACA.01.EU.pem)
+
 
 ## How to contribute
 
