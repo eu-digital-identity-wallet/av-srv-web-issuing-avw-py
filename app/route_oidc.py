@@ -337,6 +337,7 @@ def authorizationv2(
     code_challenge_method=None,
     code_challenge=None,
     authorization_details=None,
+    state=None,
 ):
 
     client_secret = str(uuid.uuid4())
