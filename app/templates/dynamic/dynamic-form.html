@@ -13,16 +13,15 @@
     <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/vnd.microsoft.icon" />
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.gif') }}" type="image/gif" />
     <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}" />
-    <link href="{{ url_for('static', filename='bootstrap-3.4.1-dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='css/stylesheets/custom/custom_en_9.7.1.20.1679559965505.css') }}" media="all" rel="stylesheet" type="text/css" />
-   
-    <link href="{{ url_for('static', filename='fontawesome-free-5.15.4-web/css/fontawesome.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ url_for('static', filename='bootstrap-3.4.1-dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="{{ url_for('static', filename='css/stylesheets/custom/custom_en_9.7.1.20.1679559965505.css') }}" media="all" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="{{ url_for('static', filename='fontawesome-free-5.15.4-web/css/fontawesome.min.css') }}" rel="stylesheet" type="text/css" /> -->
     <script type="text/javascript" id="jqueryId" src="{{ url_for('static', filename='scripts/jquery/jquery-3.6.3.min.js') }}" charset="UTF-8"></script>
 
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/promiz/promiz-1.0.6.js') }}" charset="UTF-8"></script>
 
 
-    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-3.4.1-dist/js/bootstrap.min.js') }}" charset="UTF-8" defer="true"></script>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-3.4.1-dist/js/bootstrap.min.js') }}" charset="UTF-8" defer="true"></script> -->
 
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/html5shiv/html5shiv-3.7.3.js') }}" charset="UTF-8"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/respond/respond-1.4.2.js') }}" charset="UTF-8"></script>
@@ -31,20 +30,15 @@
     <script type="text/javascript" src="{{ url_for('static', filename='scripts/loc/loc_en_9.7.1.20.1679559965505.js') }}" charset="UTF-8"></script>
 
 
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
     <title>Form for your Age Verification Wallet</title>
 </head>
 
 <body id="responsive-main-nav">
-    <!--
-    <div id="skip"><a href="#content" accesskey="M">Skip to Main Content</a></div>
-    -->
-
     <div class="main container-fluid">
 
 
         <header role="banner" class="main-header">
-            <div class="container">
-                <div class="row">
 
                     <!-- no env stamp for PRODUCTION_GENESIS -->
                     <!--
@@ -84,43 +78,46 @@
                         <script type="text/javascript" src="https://webgate.ec.europa.eu/cas/scripts/dynamic-validator/languageForm_nv_9.7.1.20.1679559965505_en.js?nv=0&nf=0" charset="UTF-8" defer="true"></script>
                     </div>
                 -->
-                </div>
-            </div>
         </header>
 
-        <div role="main" class="container">
+        <div role="main" class="mx-auto w-full max-w-screen-md p-6 flex flex-col min-h-screen">
             <div class="row">
                 <div class="col-md-12">
-
                     <!--
                     <p class="relying-party"><strong>etranslation</strong> requires you to authenticate</p>
                     -->
-                    <h1>your Age Verification Wallet</h1>
-                    <div id="content" class="content-wrap content-center col-md-6 col-sm-7">
-
-                        <div class="genericErrors" id="genericErrorsDesc">
-
-                        </div>
+                    <div id="content" class="w-full flex flex-col" style="min-height: calc(100vh - 25vh);">
                         <!-- <status>EID_COUNTRY_SELECTION</status> -->
-                        <h2>Please enter your basic information</h2>
+                        <div class="space-y-2 mb-6">
+                          <p class="text-xs uppercase tracking-wide text-gray-500 font-semibold">Test Issuer</p>
+
+                          <h1 class="font-pf text-4xl text-gray-800">Proof of Age</h1>
+
+                          <p class="font-pf text-sm text-gray-700 leading-snug">
+                            Issue Proof of Age attributes for your <strong>Age Verification</strong> demo application.
+                          </p>
+
+                          <p class="text-sm italic text-gray-500">
+                            For testing purposes only. No personal data is used.
+                          </p>
+                        </div>
                         <!--bean-ext:form action="" styleClass="mt"-->
-                        <form id="selectCountryForm" method="post" action="{{redirect_url}}" onsubmit="return submitValidation()" accept-charset="UTF-8" enctype="multipart/form-data" autocapitalize="off" spellcheck="false">
+                        <form id="selectCountryForm" method="post" class="flex flex-col h-full" action="{{redirect_url}}" onsubmit="return submitValidation()" accept-charset="UTF-8" enctype="multipart/form-data" autocapitalize="off" spellcheck="false">
                             <!-- <div class="nodisplay"><input type="hidden" name="TxId" value="ECAS_TX-7404446-Rej9lkLFeXORXm9rG7q4Xqo1xGRJ86gt3hoJcfMG3XyxQrAyn8mu9PbXRCZoKKUbCzLlIzG5jKgHy4vlfgkG5M-rS0vSrmBGYCAxyMeVAWeYi-PVgrhNnzagSfzJvUraGtvIPzqv8cbsV46ZMUiinVIlcDkNWEKzr5uBS6CMnabjUfRGxDHabrZictNyNLy0AsLWy" /></div><input type="hidden" name="loginRequestId" value="ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" id="loginRequestId" /> -->
-                            <h3>Test Provider Form</h3>
-                            <p>This data is only used for issuing credentials for testing purposes.</p>
-                            <div id="eidasCountries">
-                                {% for name, attr in mandatory_attributes.items() %}    
+                            <p class="font-pf font-bold">Define the attribute(s) status:</p>
+                            <div class="mt-10" id="eidasCountries">
+                                {% for name, attr in mandatory_attributes.items() %}
                                         {% if attr.type == 'string' %}
                                             <div class="row g-3">
                                                 <div class="col-md-12">
-                                                    <input type="text" class="form-control" placeholder="{{ name | replace('_', ' ') | title }}" aria-label="{{ name | replace('_', ' ') | title }}" name="{{ name }}" value="{{ attr.filled_value if attr.filled_value is not none else '' }}" 
+                                                    <input type="text" class="form-control" placeholder="{{ name | replace('_', ' ') | title }}" aria-label="{{ name | replace('_', ' ') | title }}" name="{{ name }}" value="{{ attr.filled_value if attr.filled_value is not none else '' }}"
                                                     {% if attr.filled_value %} readonly {% endif %} required >
                                                 </div>
                                             </div>
                                         {% elif attr.type == 'list' %}
                                             <div id="{{ name }}-container" class="list-container">
                                                  <!-- Title for the Section -->
-                                                <h3 class="section-title">{{ name | replace('_', ' ') | title }}</h3> 
+                                                <h3 class="section-title">{{ name | replace('_', ' ') | title }}</h3>
                                                  <!-- Add Button (Only if max cardinality allows more than 1) -->
                                                 {% if attr.cardinality.max != 1 %}
                                                     <button type="button" class="btn btn-primary add-item" data-target="{{ name }}-container"
@@ -128,7 +125,7 @@
                                                             {% if attr.cardinality.max != "n" %} data-max="{{ attr.cardinality.max }}" {% endif %}>
                                                         Add {{ name | replace('_', ' ') }}
                                                     </button>
-                                                {% endif %}  
+                                                {% endif %}
 
                                                <!-- Toggle Buttons for Exclusive Selection (Only if more than 1 option) -->
                                                {% if attr.attributes | length > 1 %}
@@ -150,7 +147,7 @@
                                                         {% endfor %}
                                                     </div>
                                                 {% endif %}
-                                            
+
                                                 <!-- Containers for Attribute Inputs -->
                                                 {% for option in attr.attributes %}
                                                     <div id="{{ name }}-{{ option.attribute }}-container" class="sub-container">
@@ -160,8 +157,8 @@
                                                                     <div class="row">
                                                                         {% for sub_name, sub_attr in item.items() if sub_name != "attribute" and sub_name != "cardinality" and sub_name != "not_used_if" %}
                                                                             <div class="col-md-12">
-                                                                                <input type="text" class="form-control" placeholder="{{ sub_name }}" 
-                                                                                       name="{{ name }}[{{ index }}][{{ sub_name }}]" 
+                                                                                <input type="text" class="form-control" placeholder="{{ sub_name }}"
+                                                                                       name="{{ name }}[{{ index }}][{{ sub_name }}]"
                                                                                        value="{{ sub_attr.filled_value if sub_attr.filled_value is not none else '' }}"
                                                                                        {% if sub_attr.mandatory %} required {% endif %}>
                                                                             </div>
@@ -191,14 +188,14 @@
                                                                     <div class="form-group">
 
                                                                         {% for sub_name, sub_attr in option.items() if sub_name != "attribute" and sub_name != "cardinality" and sub_name != "not_used_if" %}
-                                                                                                                                               
+
                                                                             {% set input_type = 'date' if sub_attr.value_type == "full-date" else 'text' %}
                                                                             {% if input_type == "date" %}
                                                                                 {{ sub_name | replace('_', ' ') | title }}
                                                                             {% endif %}
-                                                                            <input type="{{ input_type }}" class="form-control" placeholder="{{ sub_name | replace('_', ' ') | title }}" aria-label="{{ sub_name | replace('_', ' ') | title }}" 
-                                                                                    name="{{ name }}[0][{{ sub_name }}]" 
-                                                                                    
+                                                                            <input type="{{ input_type }}" class="form-control" placeholder="{{ sub_name | replace('_', ' ') | title }}" aria-label="{{ sub_name | replace('_', ' ') | title }}"
+                                                                                    name="{{ name }}[0][{{ sub_name }}]"
+
                                                                                     value="{{ sub_attr.filled_value if sub_attr.filled_value is not none else '' }}"
                                                                                     {% if sub_attr.mandatory %} required {% endif %}>
                                                                         {% endfor %}
@@ -219,36 +216,45 @@
                                                     </div>
                                                 {% endfor %}
                                             </div>
-                                        {% elif attr.type == 'bool' %}
-                                            <div class="row g-3">
-                                                <div class="col-md-12">
-                                                    <label for="{{ name }}">{{ name }}</label>
-                                                    <!-- Hidden input to represent the unchecked state -->
-                                                    <input type="hidden" id="{{ name }}_hidden" name="{{ name }}" value="false">
-                                                    <!-- Checkbox input -->
-                                                    <input type="checkbox" id="{{ name }}" name="{{ name }}" value="true">
-                                                </div>
+                                            {% elif attr.type == 'bool' %}
+                                            <div class="mb-6 flex items-center justify-between">
+                                                <!-- Label on the left -->
+                                                <label for="{{ name }}_toggle" class="font-pf text-lg font-bold text-gray-800">
+                                                    {{ name | replace('_', ' ') | title }}
+                                                </label>
+
+                                                <!-- Hidden input that will be submitted with the form -->
+                                                <input type="hidden" id="{{ name }}_hidden" name="{{ name }}" value="false">
+
+                                                <!-- The visual toggle switch container -->
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <!-- The actual checkbox -->
+                                                    <input type="checkbox" id="{{ name }}_toggle" value="true" class="sr-only peer">
+
+                                                    <!-- The background of the switch -->
+                                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer-checked:bg-indigo-600 transition-colors duration-200"></div>
+                                                    <div class="absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 peer-checked:translate-x-full"></div>
+                                                </label>
                                             </div>
+                                            <hr class="my-4 border-t border-gray-200" />
+
                                             <script>
-                                                function setupCheckbox(name) {
-                                                    const checkbox = document.getElementById(name);
-                                                    const hiddenInput = document.getElementById(name + "_hidden");
-                                                    
-                                                    // Function to update hidden input based on checkbox state
-                                                    function updateHiddenInput() {
-                                                        hiddenInput.value = checkbox.checked ? 'true' : 'false';
-                                                    }
-                                                    
-                                                    // Attach the change event listener
-                                                    checkbox.addEventListener('change', updateHiddenInput);
-                                                    
-                                                    // Call the function to set the initial state correctly
+                                                (() => {
+                                                    const checkbox = document.getElementById("{{ name }}_toggle");
+                                                    const hiddenInput = document.getElementById("{{ name }}_hidden");
+
+                                                    // Function to update the hidden input based on checkbox state
+                                                    const updateHiddenInput = () => {
+                                                        hiddenInput.value = checkbox.checked ? "true" : "false";
+                                                    };
+
+                                                    // Listen for changes on the checkbox
+                                                    checkbox.addEventListener("change", updateHiddenInput);
+
+                                                    // Set the initial value when the page loads
                                                     updateHiddenInput();
-                                                }
-                                                
-                                                // Setup each checkbox with a unique name
-                                                setupCheckbox("{{ name }}");
-                                            </script>                   
+                                                })();
+                                            </script>
                                         {% elif attr.type == 'uint' %}
                                             <div class="row g-3">
                                                 <div class="col-md-12">
@@ -267,16 +273,16 @@
                                             <div class="row g-3">
                                                 <div class="col-md-12">
                                                     {{ name | replace('_', ' ') | title }}
-                                                    <input type="date" class="form-control" placeholder="{{ name | replace('_', ' ') | title }}" aria-label="{{ name | replace('_', ' ') | title }}" name="{{ name }}" value="{{ attr.filled_value if attr.filled_value is not none else '' }}" 
+                                                    <input type="date" class="form-control" placeholder="{{ name | replace('_', ' ') | title }}" aria-label="{{ name | replace('_', ' ') | title }}" name="{{ name }}" value="{{ attr.filled_value if attr.filled_value is not none else '' }}"
                                                     {% if attr.filled_value %} readonly {% endif %} required >
                                                 </div>
                                             </div>
                                         {% elif attr.type == 'jpeg'%}
                                             <label>Portrait:</label>
                                             <p>Please select one option or upload a file.</p>
-                                             
+
                                             <div class="row g-3">
-                                                
+
                                                 <div class="col-md-6">
                                                     <label>
                                                         <input type="radio" name="{{ name }}"value="Port1" checked >
@@ -296,10 +302,10 @@
                                                     <label >
                                                         <input type="file" name="Image" id="fileInput" accept="image.jpeg" capture>
                                                         <div id="preview">
-                                                        </div>            
+                                                        </div>
                                                         <p>Type: image/jpeg , Size(pixels): 360x433 </p>
                                                     </label>
-                                                    
+
                                                 </div>
 
                                             </div>
@@ -326,7 +332,7 @@
                                                                 <option>D1E</option>
                                                                 <option>DE</option>
                                                             </select>
-                
+
                                                             <div class="col">
                                                                 Issue Date:
                                                                 <input type="date" class="form-control" placeholder="Issue Date" aria-label="Issue Date" name="IssueDate1" required>
@@ -335,11 +341,11 @@
                                                                 Expiry Date:
                                                                 <input type="date" class="form-control" placeholder="Expiry Date" aria-label="Expiry Date" name="ExpiryDate1" required>
                                                             </div>
-                                                            
+
                                                             <div id="AddCategory">
-                
+
                                                             </div>
-                                                            <button type="button" class="btn btn-primary btn-sm" onclick="AddCategories();">Add</button>                   
+                                                            <button type="button" class="btn btn-primary btn-sm" onclick="AddCategories();">Add</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12" id="hidden_elems">
@@ -350,22 +356,28 @@
                                                     {% endfor %}
                                                 </div>
                                             </div>
-                                        {% endif %} 
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
-                                <h3>Optional Elements</h3>
-                                {% for name, attr in optional_attributes.items() %}    
+                                <div id="add-attributes-button-container" class="my-6">
+                                  <button type="button" id="add-optional-btn" class="w-full py-3 px-4 border border-gray-400 rounded-lg text-gray-600 font-semibold hover:bg-gray-100 transition-colors">
+                                    Add Optional Attributes
+                                  </button>
+                                </div>
+                                <h3 class="hidden">Optional Elements</h3>
+                            <div id="hidden-attributes-storage" class="hidden">
+                                {% for name, attr in optional_attributes.items() %}
                                         {% if attr.type == 'string' %}
                                             <div class="row g-3">
                                                 <div class="col-md-12">
                                                     <input type="text" class="form-control" placeholder="{{ name | replace('_', ' ') | title }}" aria-label="{{ name | replace('_', ' ') | title }}" name="{{ name }}" >
                                                 </div>
                                             </div>
-                                        
+
                                         {% elif attr.type == 'list' %}
                                             <div id="{{ name }}-container" class="list-container">
                                                  <!-- Title for the Section -->
-                                                <h3 class="section-title">{{ name | replace('_', ' ') | title }}</h3> 
+                                                <h3 class="section-title">{{ name | replace('_', ' ') | title }}</h3>
                                                  <!-- Add Button (Only if max cardinality allows more than 1) -->
                                                 {% if attr.cardinality.max != 1 %}
                                                     <button type="button" class="btn btn-primary add-item" data-target="{{ name }}-container"
@@ -373,7 +385,7 @@
                                                             {% if attr.cardinality.max != "n" %} data-max="{{ attr.cardinality.max }}" {% endif %}>
                                                         Add {{ name | replace('_', ' ') }}
                                                     </button>
-                                                {% endif %}  
+                                                {% endif %}
 
                                                <!-- Toggle Buttons for Exclusive Selection (Only if more than 1 option) -->
                                                {% if attr.attributes | length > 1 %}
@@ -395,7 +407,7 @@
                                                         {% endfor %}
                                                     </div>
                                                 {% endif %}
-                                            
+
                                                 <!-- Containers for Attribute Inputs -->
                                                 {% for option in attr.attributes %}
                                                     <div id="{{ name }}-{{ option.attribute }}-container" class="sub-container">
@@ -405,8 +417,8 @@
                                                                     <div class="row">list
                                                                         {% for sub_name, sub_attr in item.items() if sub_name != "attribute" and sub_name != "cardinality" and sub_name != "not_used_if" %}
                                                                             <div class="col-md-12">
-                                                                                <input type="text" class="form-control" placeholder="{{ sub_name }}" 
-                                                                                       name="{{ name }}[{{ index }}][{{ sub_name }}]" 
+                                                                                <input type="text" class="form-control" placeholder="{{ sub_name }}"
+                                                                                       name="{{ name }}[{{ index }}][{{ sub_name }}]"
                                                                                        value="{{ sub_attr.filled_value if sub_attr.filled_value is not none else '' }}"
                                                                                        {% if sub_attr.mandatory %} required {% endif %}>
                                                                             </div>
@@ -462,8 +474,8 @@
                                                                                     </div>
                                                                                 </div>
                                                                             {% else %}
-                                                                                <input type="{{ input_type }}" class="form-control" placeholder="{{ sub_name | replace('_', ' ') | title }}" aria-label="{{ sub_name | replace('_', ' ') | title }}" 
-                                                                                        name="{{ name }}[0][{{ sub_name }}]" 
+                                                                                <input type="{{ input_type }}" class="form-control" placeholder="{{ sub_name | replace('_', ' ') | title }}" aria-label="{{ sub_name | replace('_', ' ') | title }}"
+                                                                                        name="{{ name }}[0][{{ sub_name }}]"
                                                                                         value="{{ sub_attr.filled_value if sub_attr.filled_value is not none else '' }}"
                                                                                         {% if sub_attr.mandatory %} required {% endif %}>
                                                                             {% endif %}
@@ -485,10 +497,10 @@
                                                     </div>
                                                 {% endfor %}
                                             </div>
-                                        
-                                            
-                                        
-                                                    
+
+
+
+
                                         {% elif attr.type == 'uint' %}
                                             <div class="row g-3">
                                                 <div class="col-md-12">
@@ -497,25 +509,23 @@
                                                 </div>
                                             </div>
                                         {% elif attr.type == 'bool' %}
-                                        <div class="row g-3">
-                                            <div class="col-md-12">
-                                                <label for="{{ name }}">{{ name }}</label>
-                                                <div class="inline-checkbox-group">
-                                                    <label class="radio-inline">
-                                                        <input type="radio" id="{{ name }}_unset" name="{{ name }}" value="unset" checked>
-                                                        Unset
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" id="{{ name }}_true" name="{{ name }}" value="true">
-                                                        True
-                                                    </label>
-                                                    <label class="radio-inline">
-                                                        <input type="radio" id="{{ name }}_false" name="{{ name }}" value="false">
-                                                        False
-                                                    </label>
-                                                </div>
+                                        <div class="dynamic-attribute-row flex items-center justify-between" data-attr-name="{{ name }}">
+                                            <!-- Label and Remove Button on the left -->
+                                            <div class="flex items-center gap-2">
+                                                <label class="font-pf text-lg font-bold text-blue-700">{{ name | replace('_', ' ') | title }}</label>
+                                                <!-- The remove button will be added here through the script-->
                                             </div>
-                                        </div>           
+
+                                            <!-- Toggle switch pushed to the right -->
+                                            <div class="flex items-center gap-4">
+                                                <input type="hidden" name="{{ name }}" value="false">
+                                                <label class="relative inline-flex items-center cursor-pointer">
+                                                    <input type="checkbox" value="true" class="sr-only peer toggle-input">
+                                                    <div class="w-11 h-6 bg-gray-200 rounded-full peer peer-checked:bg-indigo-600 transition-colors"></div>
+                                                    <div class="absolute top-0.5 left-[2px] w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-200 peer-checked:translate-x-full"></div>
+                                                </label>
+                                            </div>
+                                        </div>
                                         {% elif name == 'user_pseudonym' %}
                                         <div class="row g-3">
                                             <div class="col-md-12">
@@ -531,44 +541,26 @@
                                                 </div>
                                             </div>
                                         {% elif attr.type == 'jpeg'%}
-                                            <label>Portrait:</label>
-                                            <p>Please select one option or upload a file.</p>
-                                             
-                                            <div class="row g-3">
-                                                <!-- Unset option -->
-                                                <div class="col-md-6">
-                                                    <label>
-                                                        <input type="radio" name="{{ name }}" value="" checked>
-                                                        None (Unset)
-                                                    </label>
-                                                </div>
-                                                
-                                                <div class="col-md-6">
-                                                    <label>
-                                                        <input type="radio" name="{{ name }}"value="Port1">
-                                                        <img src="{{url_for('static', filename='image.jpeg')}}" width=50% alt="Option 1">
-                                                    </label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label>
-                                                        <input type="radio" name="{{ name }}" value="Port2">
-                                                        <img src="{{url_for('static', filename='image2.jpeg')}}" width=50% alt="Option 2">
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="row g-3" style="margin-top: 10% ;">
-                                                <div class="col-md-6">
-                                                    <input type="radio" name="{{ name }}" id="Option3" value="Port3">
-                                                    <label >
-                                                        <input type="file" name="Image" id="fileInput" accept="image.jpeg" capture>
-                                                        <div id="preview">
-                                                        </div>            
-                                                        <p>Type: image/jpeg , Size(pixels): 360x433 </p>
-                                                    </label>
-                                                    
-                                                </div>
-
-                                            </div>
+                                        <div class="dynamic-attribute-row" data-attr-name="{{ name }}">
+                                             <!-- Label and Remove Button Container -->
+                                             <div class="flex items-center justify-between mb-2">
+                                                 <div class="flex items-center gap-2">
+                                                     <label class="font-pf text-lg font-bold text-blue-700">{{ name | replace('_', ' ') | title }}</label>
+                                                     <!-- The remove button will be added here by JS -->
+                                                 </div>
+                                             </div>
+                                             <!-- Image Selection Radio Group -->
+                                             <div class="flex items-center gap-4">
+                                                 <label>
+                                                     <input type="radio" name="{{ name }}" value="Port1" class="sr-only peer/port1">
+                                                     <img src="{{ url_for('static', filename='image.jpeg') }}" class="w-24 h-24 rounded-lg border-2 border-transparent peer-checked/port1:border-indigo-600 cursor-pointer object-cover opacity-50 peer-checked/port1:opacity-100">
+                                                 </label>
+                                                 <label>
+                                                     <input type="radio" name="{{ name }}" value="Port2" class="sr-only peer/port2">
+                                                     <img src="{{ url_for('static', filename='image2.jpeg') }}" class="w-24 h-24 rounded-lg border-2 border-transparent peer-checked/port2:border-indigo-600 cursor-pointer object-cover">
+                                                 </label>
+                                             </div>
+                                         </div>
                                         {% elif attr.type == 'driving_privileges' %}
                                             <div class="row g-3">
                                                 <div class="col-md-12">
@@ -592,7 +584,7 @@
                                                                 <option>D1E</option>
                                                                 <option>DE</option>
                                                             </select>
-                
+
                                                             <div class="col">
                                                                 Issue Date:
                                                                 <input type="date" class="form-control" placeholder="Issue Date" aria-label="Issue Date" name="IssueDate1">
@@ -601,11 +593,11 @@
                                                                 Expiry Date:
                                                                 <input type="date" class="form-control" placeholder="Expiry Date" aria-label="Expiry Date" name="ExpiryDate1">
                                                             </div>
-                                                            
+
                                                             <div id="AddCategory">
-                
+
                                                             </div>
-                                                            <button type="button" class="btn btn-primary btn-sm" onclick="AddCategories();">Add</button>                   
+                                                            <button type="button" class="btn btn-primary btn-sm" onclick="AddCategories();">Add</button>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12" id="hidden_elems">
@@ -616,16 +608,37 @@
                                                     {% endfor %}
                                                 </div>
                                             </div>
-                                        {% endif %} 
+                                        {% endif %}
                                     {% endfor %}
                                 </div>
                             </div>
-                            <div class="clearfix"></div>
-
-
-                            <span class="more-submit">
-                                <input type="submit" onclick="AddNumberCategories();" name="proceed" accesskey="S" value="Submit" class="btn btn-primary" title="Submit" />
-                                <input type="button" name="Cancelled" accesskey="C" value="Cancel" id="cancelBtnId" class="btn btn-cancel btn-alternate cancellable" title="Cancel" onclick="window.history.back();" />                            </span>
+<!-- THIS DIV IS HIDING THE OPTIONAL ELEMENTS -->
+                </div>
+                        <div class="mt-auto py-10">
+                                    <span class="more-submit">
+                                        <div class="flex flex-col gap-1 items-center">
+                                            <button type="submit"
+                                            onclick="AddNumberCategories();"
+                                            name="proceed"
+                                            accesskey="S"
+                                            class="w-full bg-blue-900 text-white font-semibold py-3 rounded-lg shadow-md hover:bg-blue-800 transition-colors duration-200"
+                                            title="Submit">
+                                            Confirm
+                                            </button>
+                                            <!-- Spacer -->
+                                            <div class="h-0"></div>
+                                            <!-- Cancel Button -->
+                                            <button type="button"
+                                            name="Cancelled"
+                                            accesskey="C"
+                                            id="cancelBtnId"
+                                            class="w-full border-gray-400 text-gray-500 font-semibold py-2 rounded-lg"
+                                            title="Cancel"
+                                            onclick="window.history.back();">
+                                            Cancel
+                                            </button>
+                                        </div>
+                        </div>
                         </form>
                         <!--<script type="text/javascript" src="{{ url_for('static', filename='scripts/dynamic-validator/selectCountryForm_9.7.1.20.1679559965505_en.js') }}" charset="UTF-8" defer="true"></script>-->
                     </div>
@@ -635,33 +648,146 @@
         </div>
     </div>
 
-    <footer class="main-footer container-fluid" role="contentinfo">
-        <div class="container">
-            <div class="row">
-                <!-- <div class="clearfix col-sm-8">
 
-                    <ul class="eu-login-link">
-                        <li><a href="https://webgate.ec.europa.eu/cas/about.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" class="service" title="About EU Login">About EU Login</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/cookies.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" class="service" title="Cookies">Cookies</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/privacyStatement.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" accesskey="5" class="service" title="Privacy Statement">Privacy Statement</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/contact.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" accesskey="2" class="service" title="Contact">Contact</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/help.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" class="service" title="Help">Help</a></li>
-                    </ul>
-
-                    <ul class="external-link">
-
-                        <li><a href="http://europa.eu" target="_blank" class="link-external" title="European Union" rel="noopener noreferrer">European Union</a><span class="sr-only">(opens in a new tab)</span></li>
-                        <li><a href="http://europa.eu/about-eu/institutions-bodies/index_en.htm" target="_blank" class="link-external" title="EU institutions" rel="noopener noreferrer">EU institutions</a><span class="sr-only">(opens in a new tab)</span></li>
-                    </ul><span class="server-information" aria-label="EU Login server version"><span class="text-danger">9.7.1-dn1p</span><span aria-hidden="true"> | </span>8<span> </span>ms</span>
-                </div> -->
-                <!--
-                <div class="ec-logo col-sm-4" aria-label="Powered by European Commission"><span class="powered-by" aria-hidden="true">Powered by</span><a href="http://ec.europa.eu" target="_blank" rel="noopener noreferrer"><img src="https://webgate.ec.europa.eu/cas/images/ec-logo-en.png" alt="Go to European Commission website" /></a></div>
-                -->
+    <!-- ADDITIONAL ATTRIBUTES MODAL -->
+    <div id="attributes-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md flex flex-col" style="max-height: 90vh;">
+            <!-- Header -->
+            <div class="p-6 border-b flex justify-between items-center">
+                <h2 class="text-2xl font-pf font-bold text-gray-800">Additional Age Attributes</h2>
+                <button id="modal-close-btn" class="text-gray-500 hover:text-gray-800">×</button>
+            </div>
+            <!-- Content -->
+            <div class="p-6 flex-grow overflow-y-auto space-y-4" id="modal-checkbox-list">
+                <!-- Checkboxes will be inserted here -->
+            </div>
+            <!-- Footer -->
+            <div class="p-6 border-t bg-gray-50 rounded-b-lg">
+                <div class="flex flex-col gap-2">
+                    <button id="modal-add-btn" class="w-full bg-blue-900 text-white font-semibold py-3 rounded-lg">Add Attributes</button>
+                    <button id="modal-cancel-btn" class="w-full text-gray-600 font-semibold py-2">Cancel</button>
+                </div>
             </div>
         </div>
-    </footer>
-    <!-- Version 9.7.1.20 - 23/03/2023 - 09:26 -->
+    </div>
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // === DOM ELEMENTS ===
+  const modal = document.getElementById('attributes-modal');
+  const openModalBtn = document.getElementById('add-optional-btn');
+  const closeModalBtn = document.getElementById('modal-close-btn');
+  const cancelModalBtn = document.getElementById('modal-cancel-btn');
+  const addAttributesBtn = document.getElementById('modal-add-btn');
+  const checkboxListContainer = document.getElementById('modal-checkbox-list');
+  const hiddenStorage = document.getElementById('hidden-attributes-storage');
+  const mainForm = document.getElementById('selectCountryForm');
+  const insertionPoint = document.getElementById('add-attributes-button-container');
+
+  // === FUNCTION TO OPEN THE MODAL ===
+  openModalBtn.addEventListener('click', function() {
+      checkboxListContainer.innerHTML = '';
+      for (const block of hiddenStorage.children) {
+          const name = block.dataset.attrName;
+          if (name) {
+              const labelText = name.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+              const label = document.createElement('label');
+              label.className = 'flex items-center cursor-pointer p-2 rounded-md hover:bg-gray-100';
+              label.innerHTML = `
+                  <input type="checkbox" class="h-5 w-5 text-indigo-600 border-gray-400 rounded focus:ring-2 focus:ring-indigo-500" value="${name}">
+                  <span class="ml-3 text-lg text-gray-800">${labelText}</span>
+              `;
+              checkboxListContainer.appendChild(label);
+          }
+      }
+      modal.classList.remove('hidden');
+  });
+
+  // === FUNCTION TO CLOSE THE MODAL ===
+  function closeModal() { modal.classList.add('hidden'); }
+  closeModalBtn.addEventListener('click', closeModal);
+  cancelModalBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+  // === FUNCTION TO ADD ATTRIBUTES (AND DIVIDERS) TO THE FORM ===
+  addAttributesBtn.addEventListener('click', function() {
+      const selectedCheckboxes = checkboxListContainer.querySelectorAll('input:checked');
+      selectedCheckboxes.forEach(checkbox => {
+          const name = checkbox.value;
+          const blockToMove = hiddenStorage.querySelector(`[data-attr-name="${name}"]`);
+          if (blockToMove) {
+              const removeBtn = document.createElement('button');
+              removeBtn.type = 'button';
+              removeBtn.className = 'remove-btn text-gray-400 hover:text-red-500 flex items-center justify-center h-5 w-5 rounded-full border border-gray-400';
+              removeBtn.innerHTML = '<span class="font-bold text-xs leading-none">–</span>';
+
+              const labelContainer = blockToMove.querySelector('.flex.items-center.gap-2');
+              if (labelContainer) {
+                  labelContainer.appendChild(removeBtn);
+              }
+
+              // Move the block into the visible form
+              insertionPoint.before(blockToMove);
+
+
+              // Create and insert the divider right after the block we just added
+              const divider = document.createElement('hr');
+              divider.className = 'my-4 border-t border-gray-200';
+              blockToMove.after(divider);
+
+          }
+      });
+      closeModal();
+  });
+
+  // === EVENT LISTENER FOR DYNAMIC ELEMENTS (REMOVE & TOGGLE) ===
+  mainForm.addEventListener('click', function(event) {
+      // --- Handle clicking the "remove" button ---
+      const removeButton = event.target.closest('.remove-btn');
+      if (removeButton) {
+          const row = removeButton.closest('.dynamic-attribute-row');
+          if (row) {
+              // Find and remove the associated divider
+              const nextEl = row.nextElementSibling;
+              if (nextEl && nextEl.tagName === 'HR') {
+                  nextEl.remove();
+              }
+
+              // Reset the state of the inputs before moving
+              const toggleInput = row.querySelector('.toggle-input');
+              if (toggleInput) {
+                  toggleInput.checked = false;
+                  const hiddenInput = row.querySelector('input[type="hidden"]');
+                  if(hiddenInput) hiddenInput.value = 'false';
+              }
+              const radioInputs = row.querySelectorAll('input[type="radio"]');
+              if (radioInputs) {
+                  radioInputs.forEach(radio => radio.checked = false);
+              }
+
+              removeButton.remove();
+              hiddenStorage.appendChild(row);
+          }
+          return;
+      }
+
+      // --- Handle clicking the toggle switch's hidden input ---
+      const toggleLabel = event.target.closest('.relative.inline-flex');
+      if (toggleLabel) {
+          const checkbox = toggleLabel.querySelector('.toggle-input');
+          const hiddenInput = toggleLabel.closest('.flex.items-center.gap-4').querySelector('input[type="hidden"]');
+          setTimeout(() => {
+              hiddenInput.value = checkbox.checked ? 'true' : 'false';
+          }, 50);
+      }
+  });
+});
+</script>
+
 </body>
+
 <script>
 
     var room = 1;
@@ -674,7 +800,7 @@
         divtest.setAttribute("class", "form-group removeclass"+room);
         var rdiv = 'removeclass'+room;
         divtest.innerHTML = '<label>Category </label><select class="form-control" name="Category'+ room +'"><option>AM</option><option>A1</option><option>A2</option><option>A</option><option>B1</option><option>B</option><option>C1</option><option>C</option><option>D1</option><option>D</option><option>BE</option><option>C1E</option><option>CE</option><option>D1E</option><option>DE</option></select><div class="col">Issue Date:<input type="date" class="form-control" placeholder="Issue Date" aria-label="Issue Date" name="IssueDate'+ room +'" required></div><div class="col">Expiry Date:<input type="date" class="form-control" placeholder="Expiry Date" aria-label="Expiry Date" name="ExpiryDate'+ room +'" required></div><button class="btn btn-danger" type="button" onclick="remove_education_fields('+ room +');">Delete</button>';
-        
+
         objTo.appendChild(divtest)
     }
 
@@ -685,7 +811,7 @@
         let at_least_one_of= optionalAttributes["at_least_one_of"];
 
         if (!at_least_one_of || at_least_one_of.length === 0) {
-            return true; 
+            return true;
         }
 
         let input = document.querySelector('input[name="given_name"]');
@@ -697,19 +823,19 @@
         let isValid = at_least_one_of.some(field => {
             let input = document.querySelector(`input[name="${field}"]`);
             console.log(`Checking ${field}:`, input ? input.value : "Not found");
-            return input && input.value.trim() !== "";  
+            return input && input.value.trim() !== "";
         });
 
         if (!isValid) {
             // Get the names of the required fields that are empty
             let missingFields = at_least_one_of.filter(field => {
                 let input = document.querySelector(`input[name="${field}"]`);
-                return !input || input.value.trim() === ""; 
+                return !input || input.value.trim() === "";
             });
 
             // Create a message listing all missing fields
             let missingFieldsMessage = missingFields.map(field => {
-                let formattedField = field.replace(/_/g, " ") 
+                let formattedField = field.replace(/_/g, " ")
                                             .replace(/\b\w/g, char => char.toUpperCase());
                 return formattedField;
             }).join(", ");
@@ -723,11 +849,11 @@
         return true;
 
     }
-    
+
     function remove_education_fields(rid) {
         $('.removeclass'+rid).remove();
         room = room-1;
-        
+
     }
 
     function AddNumberCategories(){
@@ -748,7 +874,7 @@
 
     document.addEventListener("DOMContentLoaded", function() {
         console.log("DOM fully loaded");
-        
+
         var isValid= false
 
         const fileInput = document.getElementById('fileInput');
@@ -757,7 +883,7 @@
 
                 var files = event.target.files;
                 var preview = document.getElementById('preview');
-                
+
                 // Clear any existing content
                 preview.innerHTML = '';
 
@@ -819,12 +945,12 @@
                     console.error("Parent container not found.");
                     return;
                 }
-                
+
 
                 let input = this.getAttribute("data-attributes")
                 // Replace single quotes with double quotes
                 let jsonString = input.replace(/'/g, '"');
-                
+
                 // Replace Python's None, True, and False with JavaScript's equivalents
                 jsonString = jsonString.replace(/None/g, 'null')
                                         .replace(/True/g, 'true')
@@ -886,16 +1012,16 @@
                 let innerHTML = "";
                 Object.keys(selectedOption).forEach(subName => {
                     console.log("\nSubname:", subName)
-                    
+
                     if (subName != "attribute" && subName != "cardinality" && subName != "not_used_if") {
-                    
-                
+
+
                         const subAttr = selectedOption[subName];
                         //const newItem = document.createElement("div");
                         //newItem.classList.add("list-item", "form-group");
                         innerHTML += `
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="${subName}" 
+                                <input type="text" class="form-control" placeholder="${subName}"
                                     name="${containerId}[${subName}]" value="${subAttr.filled_value || ''}" ${subAttr.mandatory ? 'required' : ''}>
                             </div>
                         `;
@@ -903,7 +1029,7 @@
                         console.log("\nNew Item:", newItem)
 
                     }
-                
+
                 });
 
                 innerHTML += `
@@ -914,8 +1040,8 @@
                         </div>
                     `;
 
-                    
-                
+
+
                 newItem.innerHTML = innerHTML;
 
                 // Append the Add Button separately
@@ -927,7 +1053,7 @@
                     console.log("\nTarger: ", containerId)
                     addButton.dataset.name = selectedOption.attribute;
                     addButton.dataset.attributes = JSON.stringify(selectedOption);
-                    
+
                     if (selectedOption.cardinality.max !== "n") {
                         addButton.dataset.max = selectedOption.cardinality.max;
                     }
@@ -939,7 +1065,7 @@
                 }
 
                 selectedContainer.appendChild(newItem);
-                
+
             });
         });
 
@@ -1006,7 +1132,7 @@
 
                                 innerHTML += `
                                     <div class="col-md-12">
-                                        <input type="${inputType}" class="form-control" placeholder="${attrKey.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}" 
+                                        <input type="${inputType}" class="form-control" placeholder="${attrKey.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}"
                                             name="${containerId}[${index}][${attrKey}]" value="${value}" ${isMandatory}>
                                     </div>
                                 `;
@@ -1031,7 +1157,7 @@
 
                             innerHTML += `
                                 <div class="col-md-12">
-                                    <input type="${inputType}" class="form-control" placeholder="${attrKey.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}" 
+                                    <input type="${inputType}" class="form-control" placeholder="${attrKey.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())}"
                                         name="${containerId}[${index}][${attrKey}]" value="${value}" ${isMandatory}>
                                 </div>
                             `;
@@ -1070,14 +1196,14 @@
 
         function submitForm() {
             if (isValid) {
-                document.getElementById('myselectCountryForm').submit(); 
+                document.getElementById('myselectCountryForm').submit();
             }
         }
 
-        
+
         function validateImage() {
 
-        
+
             // File uploaded, check if radio button is checked
             var radioButtons = document.getElementById('Option3');
 
@@ -1087,7 +1213,7 @@
 
                 if (!file) {
                     alert('No file selected.');
-                    return false; 
+                    return false;
                 }
 
                 console.log(file)
@@ -1095,8 +1221,8 @@
                 // Check file type
                 if (file.type !== 'image/jpeg') {
                     alert('Please select a JPEG image.');
-                    fileInput.value = ''; 
-                    return false; 
+                    fileInput.value = '';
+                    return false;
                 }
 
                 // Check image dimensions
@@ -1113,10 +1239,10 @@
                     } else{
                         isValid=true;
                         submitForm();
-                        
+
                     }
                 };
-                
+
                 img.src = URL.createObjectURL(file);
 
                 // Prevent form submission while waiting for image dimensions validation
@@ -1125,7 +1251,7 @@
                 document.getElementById('myselectCountryForm').submit();
             }
         }
-            
+
     });
 
 </script>

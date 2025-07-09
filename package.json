@@ -1,0 +1,25 @@
+{
+  "name": "av-srv-web-issuing-avw-py",
+  "version": "1.0.0",
+  "description": "<!-- SPDX-FileCopyrightText: 2025 European Commission",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tailwindcss -i ./assets/input.css -o ./app/static/css/tailwind.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py/issues"
+  },
+  "homepage": "https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {}
+}
