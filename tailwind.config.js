@@ -21,6 +21,9 @@ module.exports = {
       fontFamily: {
         pf: ['"PF Square Sans Pro"', 'sans-serif'],
       },
+      colors: {
+        'custom-gray': '#606276',
+      },
     },
   },
   variants: {
