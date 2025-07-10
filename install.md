@@ -20,6 +20,15 @@ and should only be used with Flask v. 2.3 or higher.
 
 To install [Flask](https://flask.palletsprojects.com/en/2.3.x/), please follow the [Installation Guide](https://flask.palletsprojects.com/en/2.3.x/installation/).
 
+## 2. NPM
+
+The AV Issuer was tested with
+
++ NPM 10.6.0
++ NodeJS v20.12.2
+
+To install [NPM](https://docs.npmjs.com/), please follow the [Installation Guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
 ## 3. How to run the AV Issuer?
 
 To run the AV Issuer, please follow these simple steps (some of which may have already been completed when installing Flask) for Linux/macOS or Windows.
@@ -66,15 +75,24 @@ To run the AV Issuer, please follow these simple steps (some of which may have a
     pip install -r app/requirements.txt
     ```
 
-6. Setup secrets
+6. NPM build
+    ```shell
+    npm install
+    ```
+
+    ```shell
+    npm run build
+    ```
+
+7. Setup secrets
    
    -  Copy ```app/app_config/__config_secrets.py``` to ```app/app_config/config_secrets.py``` and modify secrets.
 
-7. Service Configuration
+8. Service Configuration
 
    - Configure the service according to [documentation](api_docs/configuration.md)  
 
-8. Run the AV Issuer 
+9. Run the AV Issuer 
 
     On the root directory of the clone repository, insert one of the following command lines to run the AV Issuer.
 
