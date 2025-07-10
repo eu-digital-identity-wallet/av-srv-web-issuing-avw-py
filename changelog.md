@@ -31,4 +31,3 @@ and this project adheres to [Semantic Versioning](https://semverdoc.org/).
 ## [0.2.2]
 ### Changed
 + UI upgrades
-
