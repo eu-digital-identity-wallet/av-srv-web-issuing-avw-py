@@ -34,12 +34,18 @@ class ConfService:
     service_url = os.getenv("SERVICE_URL", "https://issuer.ageverification.dev/")
     # service_url = "https://127.0.0.1:5000/"
 
-    wallet_test_url = "https://tester.issuer.eudiw.dev/"
+    wallet_test_url = os.getenv("WALLET_TEST_URL", "https://tester.issuer.ageverification.dev/")
 
-    revocation_service_url = "https://issuer.eudiw.dev/token_status_list/take"
+    revocation_service_url = os.getenv(
+        "REVOCATION_SERVICE_URL", "https://issuer.eudiw.dev/token_status_list/take"
+    )
 
     # ---------------------------------------------------------------------------
-    trusted_CAs_path = "/etc/age_verification/cert/"
+    trusted_CAs_path = os.getenv(
+        "TRUSTED_CAS_PATH", "/etc/eudiw/age_verification/cert/"
+    )
+
+    privKey_path = os.getenv("PRIVKEY_PATH", "/etc/eudiw/age_verification/privKey/")
 
     # ------------------------------------------------------------------------------------------------
     # eIDAS Node base href (used in lightrequest)
@@ -61,8 +67,10 @@ class ConfService:
     # eIDAS node Age Verification attributes
     eidasnode_attributes = ["DateOfBirth"]
 
-    #Nonce endpoint
-    nonce_key = "/etc/eudiw/pid-issuer/privKey/nonce_rsa4096.pem"
+    # Nonce endpoint
+    nonce_key = os.getenv(
+        "NOUNCE_KEY", "/etc/eudiw/pid-issuer/privKey/nonce_rsa2048.pem"
+    )
 
     # ------------------------------------------------------------------------------------------------
     # OpenID endpoints

@@ -27,3 +27,8 @@ and this project adheres to [Semantic Versioning](https://semverdoc.org/).
 + Fix oauth2 metadata
 
 + State echo bug in authorization endpoint
+
+## [0.2.2]
+### Changed
++ UI upgrades
+

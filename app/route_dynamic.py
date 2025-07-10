@@ -199,7 +199,7 @@ def dynamic_R1(country):
         + " has been created"
     ) """
 
-    if country == "AV":
+    if country == "AV" or country == "AV2":
         attributesForm = getAttributesForm(session["credentials_requested"])
         if "user_pseudonym" in attributesForm:
             attributesForm.update({"user_pseudonym": {"type":"string", "filled_value":str(uuid4())}})
@@ -214,27 +214,6 @@ def dynamic_R1(country):
             mandatory_attributes=attributesForm,
             optional_attributes=attributesForm2,
             redirect_url=cfgserv.service_url + "dynamic/form",
-        )
-
-    elif country == "sample":
-        user_id = generate_unique_id()
-
-        form_dynamic_data[user_id] = cfgserv.sample_data.copy()
-        form_dynamic_data[user_id].update({"expires":datetime.now() + timedelta(minutes=cfgserv.form_expiry)})
-
-        if "jws_token" not in session or "authorization_params" in session:
-            session["jws_token"] = session["authorization_params"]["token"]
-
-        session["returnURL"] = cfgserv.OpenID_first_endpoint
-
-        return redirect(
-            url_get(
-                session["returnURL"],
-                {
-                    "jws_token": session["jws_token"],
-                    "username": "sample." + user_id,
-                },
-            )
         )
 
     elif cfgcountries.supported_countries[country]["connection_type"] == "eidasnode":
@@ -417,8 +396,8 @@ def red():
             else:
                 form_data[doctype].update({"age_over_18":"Pending"}) """
 
-            form_data[doctype].update({"estimated_issuance_date":today.strftime("%Y-%m-%d")})
-            form_data[doctype].update({"estimated_expiry_date":expiry.strftime("%Y-%m-%d")})
+            form_data[doctype].update({"issuance_date":today.strftime("%Y-%m-%d")})
+            form_data[doctype].update({"expiry_date":expiry.strftime("%Y-%m-%d")})
             form_data[doctype].update({"issuing_country": session["country"]})
             form_data[doctype].update({"issuing_authority":doctype_config["issuing_authority"] })
             if "credential_type" in doctype_config:
@@ -529,8 +508,8 @@ def red():
         today = date.today()
         expiry = today + timedelta(days=doctype_config["validity"])
     
-        presentation_data[credential].update({"estimated_issuance_date":today.strftime("%Y-%m-%d")})
-        presentation_data[credential].update({"estimated_expiry_date":expiry.strftime("%Y-%m-%d")})
+        presentation_data[credential].update({"issuance_date":today.strftime("%Y-%m-%d")})
+        presentation_data[credential].update({"expiry_date":expiry.strftime("%Y-%m-%d")})
         presentation_data[credential].update({"issuing_country": session["country"]}),
         presentation_data[credential].update({"issuing_authority": doctype_config["issuing_authority"]})
 
@@ -619,7 +598,7 @@ def dynamic_R2_data_collect(country, user_id):
     user_id -- user identifier needed to get respective attributes
     country -- credential issuing country that user selected
     """
-    if country == "AV":
+    if country == "AV" or country == "AV2":
         data = form_dynamic_data.get(user_id, "Data not found")
 
         if data == "Data not found":
@@ -817,7 +796,7 @@ def credentialCreation(credential_request, data, country):
         # formatting_functions = document_mappings[doctype]["formatting_functions"]
 
         form_data = {}
-        if country == "AV":
+        if country == "AV" or country == "AV2":
             form_data = data
 
         elif country == "sample":
@@ -946,7 +925,7 @@ def Dynamic_form():
     """
     session["route"] = "/dynamic/form"
     session["version"] = "0.5"
-    session["country"] = "AV"
+
     # if GET
     if request.method == "GET":
         if (
@@ -1137,8 +1116,8 @@ def Dynamic_form():
         today = date.today()
         expiry = today + timedelta(days=doctype_config["validity"])
     
-        presentation_data[credential].update({"estimated_issuance_date":today.strftime("%Y-%m-%d")})
-        presentation_data[credential].update({"estimated_expiry_date":expiry.strftime("%Y-%m-%d")})
+        presentation_data[credential].update({"issuance_date":today.strftime("%Y-%m-%d")})
+        presentation_data[credential].update({"expiry_date":expiry.strftime("%Y-%m-%d")})
         presentation_data[credential].update({"issuing_country": session["country"]}),
         presentation_data[credential].update({"issuing_authority": doctype_config["issuing_authority"]})
         
@@ -1165,8 +1144,10 @@ def Dynamic_form():
                     presentation_data[credential].pop("IssueDate" + f)
                     presentation_data[credential].pop("ExpiryDate" + f)
             presentation_data[credential].pop("NumberCategories")
-
-    return render_template("dynamic/form_authorize.html", presentation_data=presentation_data, user_id="AV." + user_id, redirect_url=cfgserv.service_url + "dynamic/redirect_wallet" )
+    
+    user_id2 = session["country"] + "." + user_id
+    
+    return render_template("dynamic/form_authorize.html", presentation_data=presentation_data, user_id=user_id2, redirect_url=cfgserv.service_url + "dynamic/redirect_wallet" )
 
 @dynamic.route("/redirect_wallet", methods=["GET", "POST"])
 def redirect_wallet():
