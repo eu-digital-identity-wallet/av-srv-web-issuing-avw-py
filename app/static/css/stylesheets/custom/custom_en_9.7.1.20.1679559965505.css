@@ -3001,6 +3001,7 @@ form ul.error {
 .EC,
 .CW,
 .AV,
+.AV2,
 .CH {
     display: block;
     float: left;
@@ -3156,6 +3157,10 @@ form ul.error {
 }
 
 .AV {
+    background-position: 0 -1568px
+}
+
+.AV2 {
     background-position: 0 -1568px
 }
 

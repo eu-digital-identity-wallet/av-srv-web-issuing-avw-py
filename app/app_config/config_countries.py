@@ -17,7 +17,7 @@
 ###############################################################################
 """
 
-This config_countries.py contains configuration data related to the countries supported by the Age Verification Service. 
+This config_countries.py contains configuration data related to the countries supported by the Age Verification Service.
 
 NOTE: You should only change it if you understand what you're doing.
 """
@@ -31,9 +31,20 @@ class ConfCountries:
     supported_countries = {
         formCountry: {
             "name": "FormEU",
-            "privkey": "/etc/eudiw/age_verification/privKey/AgeVerificationDS-001.pem",
+            "privkey": cfgserv.privKey_path + "AgeVerificationDS-001.pem",
             "privkey_passwd": None,  # None or bytes
-            "cert": "/etc/eudiw/age_verification/cert/AgeVerificationDS-001_cert.der",
+            "cert": cfgserv.trusted_CAs_path + "AgeVerificationDS-001_cert.der",
+            "un_distinguishing_sign": "AV",
+            "supported_credentials": [
+                "eu.europa.ec.eudi.age_verification_mdoc",
+            ],
+            "dynamic_R2": cfgserv.service_url + "dynamic/form_R2",
+        },
+        "AV2": {
+            "name": "FormAV (Not in Trusted List. Test flow only)",
+            "privkey": cfgserv.privKey_path + "/bak/AgeVerificationDS-001.pem",
+            "privkey_passwd": None,  # None or bytes
+            "cert": cfgserv.trusted_CAs_path + "/bak/AgeVerificationDS-001_cert.der",
             "un_distinguishing_sign": "AV",
             "supported_credentials": [
                 "eu.europa.ec.eudi.age_verification_mdoc",
@@ -42,25 +53,23 @@ class ConfCountries:
         },
         "PT": {
             "name": "Portugal",
-            "privkey": "/etc/eudiw/age_verification/privKey/AgeVerificationDS-0001_PT.pem",
+            "privkey": cfgserv.privKey_path + "AgeVerificationDS-0001_PT.pem",
             "privkey_passwd": None,  # None or bytes
-            "cert": "/etc/eudiw/age_verification/cert/AgeVerificationDS-0001_PT_cert.der",
+            "cert": cfgserv.trusted_CAs_path + "AgeVerificationDS-0001_PT_cert.der",
             "un_distinguishing_sign": "P",
-            "supported_credentials": [
-            ],
+            "supported_credentials": [],
             "connection_type": "oauth",
             "oidc_auth": {
                 "url": "https://preprod.autenticacao.gov.pt/oauth/askauthorization?",
                 "redirect_uri": cfgserv.service_url + "dynamic/redirect",
                 "scope": {
                     "eu.europa.ec.av.1": {
-                        #"given_name": "http://interop.gov.pt/MDC/Cidadao/NomeProprio",
-                        #"family_name": "http://interop.gov.pt/MDC/Cidadao/NomeApelido",
+                        # "given_name": "http://interop.gov.pt/MDC/Cidadao/NomeProprio",
+                        # "family_name": "http://interop.gov.pt/MDC/Cidadao/NomeApelido",
                         "birth_date": "http://interop.gov.pt/MDC/Cidadao/DataNascimento",
-                        #"nationality": "http://interop.gov.pt/MDC/Cidadao/Nacionalidade",
-                        #"birth_place":"http://interop.gov.pt/IMTT/Cidadao/LocalNascimento",
-                        #"nif":"http://interop.gov.pt/MDC/Cidadao/NIF"
-                        
+                        # "nationality": "http://interop.gov.pt/MDC/Cidadao/Nacionalidade",
+                        # "birth_place":"http://interop.gov.pt/IMTT/Cidadao/LocalNascimento",
+                        # "nif":"http://interop.gov.pt/MDC/Cidadao/NIF"
                     },
                     "org.iso.18013.5.1.mDL": {
                         "nif": "http://interop.gov.pt/MDC/Cidadao/NIF",
