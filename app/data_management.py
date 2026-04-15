@@ -20,12 +20,20 @@ This manages necessary data and it's removal
 
 """
 
+import hashlib
 import json
 import threading
 from datetime import datetime
 
 from .app_config.config_service import ConfService as cfgservice
 import requests
+
+
+def hash_token(token):
+    # OAuth tokens are stored as SHA-256 hashes so that a memory dump or an
+    # accidental serialization of session_ids never discloses the raw bearer.
+    # Lookup callers must hash the incoming token before comparison.
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
 
 
 parRequests = {}
@@ -56,12 +64,13 @@ def getSessionId_authCode(target_authCode):
     return matching_session_id
 
 def getSessionId_accessToken(target_accessToken):
+    target_hash = hash_token(target_accessToken)
     matching_session_id = None
     for session_id, session_data in session_ids.items():
-        if "access_token" in session_data and session_data["access_token"] == target_accessToken:
+        if "access_token" in session_data and session_data["access_token"] == target_hash:
             matching_session_id = session_id
             break
-    
+
     return matching_session_id
 
 ################################################

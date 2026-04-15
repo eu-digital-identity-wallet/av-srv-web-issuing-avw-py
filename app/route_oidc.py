@@ -86,6 +86,7 @@ CORS(oidc)  # enable CORS on the blue print
 # variable for PAR requests
 from app.data_management import (
     getSessionId_accessToken,
+    hash_token,
     parRequests,
     transaction_codes,
     deferredRequests,
@@ -674,7 +675,7 @@ def token():
         response_json = json.loads(response.get_data())
 
         if "access_token" in response_json:
-            session_ids[session_id]["access_token"] = response_json["access_token"]
+            session_ids[session_id]["access_token"] = hash_token(response_json["access_token"])
 
         if "refresh_token" in response_json:
             session_ids[session_id]["refresh_token"] = response_json["refresh_token"]
@@ -757,7 +758,7 @@ def token():
         response_json = response.json()
 
         if "access_token" in response_json:
-            session_ids[session_id]["access_token"] = response_json["access_token"]
+            session_ids[session_id]["access_token"] = hash_token(response_json["access_token"])
 
         if "refresh_token" in response_json:
             session_ids[session_id]["refresh_token"] = response_json["refresh_token"]
@@ -776,9 +777,7 @@ def token():
                 {session_id: {"expires": datetime.now() + timedelta(minutes=60)}}
             )
 
-            print("\nAdding ", response_json["access_token"], "to ", session_id)
-
-            session_ids[session_id]["access_token"] = response_json["access_token"]
+            session_ids[session_id]["access_token"] = hash_token(response_json["access_token"])
 
     else:
 
