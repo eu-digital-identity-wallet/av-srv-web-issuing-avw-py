@@ -1,10 +1,10 @@
 {
     "issuer":
-        "https://issuer.ageverification.dev",
+        "https://dev.issuer.eudiw.dev",
     "authorization_endpoint":
-        "https://issuer.ageverification.dev/authorizationV3",
+        "https://dev.issuer.eudiw.dev/oidc/authorization",
     "token_endpoint":
-        "https://issuer.ageverification.dev/token",
+        "https://dev.issuer.eudiw.dev/oidc/token",
     "token_endpoint_auth_methods_supported": 
         ["public"],
     "token_endpoint_auth_signing_alg_values_supported":
@@ -12,11 +12,11 @@
     "code_challenge_methods_supported": 
         ["S256"],
     "userinfo_endpoint": 
-        "https://issuer.ageverification.dev/userinfo",
+        "https://dev.issuer.eudiw.dev/oidc/userinfo",
     "jwks_uri":
-        "https://issuer.ageverification.dev/static/jwks.json",
+        "https://dev.issuer.eudiw.dev/oidc/static/jwks.json",
     "registration_endpoint":
-        "https://issuer.ageverification.dev/registration",
+        "https://dev.issuer.eudiw.dev/oidc/registration",
     "scopes_supported": [
         "openid"],
     "response_types_supported":

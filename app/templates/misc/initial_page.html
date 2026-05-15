@@ -3,106 +3,90 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="Title" content="Age Verification" />
-    <meta name="Keywords" content="Age Verification, Enrolment" />
-    <meta name="Description" content="Request Age Verification Attestation" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
     <meta http-equiv="Cache-Control" content="no-cache,no-store,must-revalidate" />
     <meta http-equiv="Pragma" content="no-cache" />
-    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}"
+        type="image/vnd.microsoft.icon" />
     <link rel="icon" href="{{ url_for('static', filename='images/favicon.gif') }}" type="image/gif" />
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}" />
-    <link href="{{ url_for('static', filename='bootstrap-3.4.1-dist/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='css/stylesheets/custom/custom_en_9.7.1.20.1679559965505.css') }}" media="all" rel="stylesheet" type="text/css" />
-    <link href="{{ url_for('static', filename='fontawesome-free-5.15.4-web/css/fontawesome.min.css') }}" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" id="jqueryId" src="{{ url_for('static', filename='scripts/jquery/jquery-3.6.3.min.js') }}" charset="UTF-8"></script>
-
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/promiz/promiz-1.0.6.js') }}" charset="UTF-8"></script>
-
-    <script type="text/javascript" src="{{ url_for('static', filename='bootstrap-3.4.1-dist/js/bootstrap.min.js') }}" charset="UTF-8" defer="true"></script>
-
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/html5shiv/html5shiv-3.7.3.js') }}" charset="UTF-8"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/respond/respond-1.4.2.js') }}" charset="UTF-8"></script>
-    <meta name="referrer" content="no-referrer">
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/loc/loc_en_9.7.1.20.1679559965505.js') }}" charset="UTF-8"></script>
-
-    <title>Age Verification Testing Issuer</title>
+    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
+    <title>EU AV Test Issuer</title>
 </head>
 
-<body id="responsive-main-nav">
-    <!--
-    <div id="skip"><a href="#content" accesskey="M">Skip to Main Content</a></div>
-    -->
+<body class="bg-gray-50 font-sans min-h-screen flex flex-col">
 
-    <div class="main container-fluid">
+    <!-- Nav -->
+    <nav class="bg-blue-900 border-b border-blue-800">
+        <div class="max-w-5xl mx-auto px-6 py-3 flex items-center gap-4">
+            <img src="{{ url_for('static', filename='ic-logo.svg') }}" alt="AV Issuer" class="h-9 w-auto">
+            <div class="h-6 w-px bg-blue-700"></div>
+            <span class="text-white font-semibold text-sm tracking-wide">EU Age Verification Issuer</span>
+        </div>
+    </nav>
 
+    <!-- Page -->
+    <main class="flex-1 flex items-start justify-center px-4 py-12">
+        <div class="w-full max-w-lg">
 
-        <header role="banner" class="main-header">
-            <div class="container">
-                <div class="row">
-                    <img src="{{url_for('static', filename='ic-logo.svg')}}">
+            <!-- Hero -->
+            <div class="mb-8">
+                <p class="text-xs font-bold uppercase tracking-widest text-blue-700 mb-2">Test Issuer</p>
+                <h1 class="font-pf text-4xl font-bold text-gray-900 mb-3">EU AV Test Issuer</h1>
+                <p class="text-gray-500 leading-relaxed">
+                    This is a test issuer for the EU Age Verification solution supporting issuing
+                    the AV Attestation as an mDoc format following the OID4VCI.
+                </p>
+            </div>
+
+            <!-- Credential Offer card -->
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4">
+                <div class="px-6 py-5 border-b border-gray-50">
+                    <div class="flex items-start gap-4">
+                        <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0 mt-0.5">
+                            <svg class="w-5 h-5 text-blue-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            </svg>
+                        </div>
+                        <div class="min-w-0">
+                            <h2 class="font-semibold text-gray-900 mb-1">OID4VCI Credential Offer Flow</h2>
+                            <p class="text-sm text-gray-500 leading-relaxed">
+                                The Issuer supports the OID4VCI Credential Offer flow. This feature enables
+                                over-the-counter issuance.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-6 py-4">
+                    <a href="{{ service_url }}/credential_offer"
+                        class="flex items-center justify-center gap-2 w-full bg-blue-900 text-white font-semibold py-3 rounded-xl hover:bg-blue-800 transition-colors duration-200 text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                        Start Credential Offer
+                    </a>
                 </div>
             </div>
-        </header>
 
-        <div role="main" class="container">
-            <div class="row">
-                <div class="col-md-12">
+            <!-- Repo link -->
+            <p class="text-xs text-gray-400 text-center">
+                Issuer repository:
+                <a href="https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py"
+                    class="text-blue-600 hover:text-blue-800 hover:underline">
+                    av-srv-web-issuing-avw-py
+                </a>
+            </p>
 
-                    <!--
-                    <p class="relying-party"><strong>etranslation</strong> requires you to authenticate</p>
-                    -->
-                    <h1>Age Verification Testing Issuer</h1>
-                    <div id="content" class="content-wrap content-center col-md-6 col-sm-7">
-
-                        <div class="genericErrors" id="genericErrorsDesc">
-
-                        </div>
-                            <!-- <status>EID_COUNTRY_SELECTION</status> -->
-                            <p> This is a Age Verification Testing Issuer supporting the issuance of the Age Verification Attestation in mDoc format at the following OID4VCI url: <a href={{oidc}}>{{oidc}}</a></p>
-                            <p> Issuer repository can be found at: <a href="https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py">https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py</a></p>
-                            <p>This implementation conforms to the specification defined at: <a href="https://ageverification.dev/Technical%20Specification/architecture-and-technical-specifications/">Age Verification Specification</a></p>
-                            <!--bean-ext:form action="" styleClass="mt"-->
-                            <!--
-                            <p>Guides:</p>
-                            <p><a href="static/issuer_guides/credential_offer_guide.html">Guide Credential Offer</a></p>
-                            <p><a href="static/issuer_guides/credential_offer_guide_pre_auth.html">Guide Credential Offer Pre-Authorization</a></p>
-                            <p><a href="static/issuer_guides/credential_offer_guide_deferred.html">Guide Credential Offer Deferred</a></p>
-                            <p><a href="static/issuer_guides/credential_offer_dynamic_age_over18.html">Guide Credential Offer Dynamic</a></p>
-                            -->
-                        </div>
-
-                </div>
-            </div>
         </div>
-    </div>
+    </main>
 
-    <footer class="main-footer container-fluid" role="contentinfo">
-        <div class="container">
-            <div class="row">
-                <!-- <div class="clearfix col-sm-8">
-
-                    <ul class="eu-login-link">
-                        <li><a href="https://webgate.ec.europa.eu/cas/about.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" class="service" title="About EU Login">About EU Login</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/cookies.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" class="service" title="Cookies">Cookies</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/privacyStatement.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" accesskey="5" class="service" title="Privacy Statement">Privacy Statement</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/contact.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" accesskey="2" class="service" title="Contact">Contact</a></li>
-                        <li><a href="https://webgate.ec.europa.eu/cas/help.html?loginRequestId=ECAS_LR-12907874-lFk8VGOXm5Wv9sTtMFxxCMYjUFYj1oyp1KB0e9CptxxL0NuACxlcyti7UHNPxbdzOqSrnNBPN1ll8kLzi00LRN-rS0vSrmBGYCna66T9IuSKW-P6QgQVzQzxVCzOgIh6P3d1X9xVGnkDA3YFGOAmdliNnzQVzScjsEzc7t8ao1FsJS3VNDfzPNYnzH2FPsp38aFmqD" class="service" title="Help">Help</a></li>
-                    </ul>
-
-                    <ul class="external-link">
-
-                        <li><a href="http://europa.eu" target="_blank" class="link-external" title="European Union" rel="noopener noreferrer">European Union</a><span class="sr-only">(opens in a new tab)</span></li>
-                        <li><a href="http://europa.eu/about-eu/institutions-bodies/index_en.htm" target="_blank" class="link-external" title="EU institutions" rel="noopener noreferrer">EU institutions</a><span class="sr-only">(opens in a new tab)</span></li>
-                    </ul><span class="server-information" aria-label="EU Login server version"><span class="text-danger">9.7.1-dn1p</span><span aria-hidden="true"> | </span>8<span> </span>ms</span>
-                </div> -->
-                <!--
-                <div class="ec-logo col-sm-4" aria-label="Powered by European Commission"><span class="powered-by" aria-hidden="true">Powered by</span><a href="http://ec.europa.eu" target="_blank" rel="noopener noreferrer"><img src="https://webgate.ec.europa.eu/cas/images/ec-logo-en.png" alt="Go to European Commission website" /></a></div>
-                -->
-            </div>
-        </div>
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 py-4">
+        <p class="text-center text-xs text-gray-300">For testing purposes only · EU Age Verification</p>
     </footer>
-    <!-- Version 9.7.1.20 - 23/03/2023 - 09:26 -->
+
 </body>
 
 </html>

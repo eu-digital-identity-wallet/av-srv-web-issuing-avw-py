@@ -1,0 +1,9 @@
+services:
+  issuer_frontend:
+    image: ghcr.io/eu-digital-identity-wallet/av-srv-web-issuing-avw-py:latest
+    ports:
+      - "6007:5000"
+    volumes:
+      - /tmp/issuer_frontend/log_dev:/tmp/issuer_frontend/log_dev
+      - /etc/issuer_config/frontend_config.yaml:/etc/issuer_config/frontend_config.yaml:ro
+    restart: unless-stopped

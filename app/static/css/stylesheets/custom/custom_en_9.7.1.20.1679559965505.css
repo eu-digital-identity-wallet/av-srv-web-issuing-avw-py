@@ -3000,8 +3000,7 @@ form ul.error {
 .SK,
 .EC,
 .CW,
-.AV,
-.AV2,
+.FC,
 .CH {
     display: block;
     float: left;
@@ -3156,11 +3155,7 @@ form ul.error {
     background-position: 0 -1568px
 }
 
-.AV {
-    background-position: 0 -1568px
-}
-
-.AV2 {
+.FC {
     background-position: 0 -1568px
 }
 

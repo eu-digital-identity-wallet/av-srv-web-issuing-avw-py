@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <head>
    <meta charset="utf-8">
@@ -7,20 +8,20 @@
    <meta name="robots" content="noindex, nofollow" />
    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}" />
    <link href="{{ url_for('static', filename='css/tailwind.css') }}" rel="stylesheet">
-   <title>Request Credentials - Select Issuer</title>
+   <title>Request Credentials for your EUDI Wallet</title>
 </head>
 <body class="font-pf">
    <!-- This is the main container that drives the sticky footer layout -->
    <div class="mx-auto w-full max-w-screen-md flex flex-col min-h-screen">
       <!-- Header Content -->
       <header class="p-6">
-         <p class="text-xs uppercase tracking-wide text-gray-500 font-semibold">Test Issuer</p>
-         <h1 class="font-pf text-4xl text-gray-800">Proof of Age</h1>
-         <h3 class="font-bold text-gray-800">Please choose the type of issuer you want to use for testing.</h3>
+         <p class="text-xs uppercase tracking-wide text-gray-500 font-semibold">Test Credentials Provider</p>
+         <p>This Credentials Provider should only be used for issuing Credentials for testing purposes.</p>
+         <h3 class="font-bold text-gray-800">Please select your country of origin</h3>
       </header>
       <!-- Form -->
       <form id="selectCountryForm" method="post"
-         action="{{redirect_url}}dynamic/?authorization_details={{authorization_details}}"
+         action="{{redirect_url}}/dynamic/country_selected"
          class="flex-grow flex flex-col">
          <!-- Main scrolling area -->
          <main class="flex-grow p-6">
@@ -37,7 +38,7 @@
                      <!--flag container with fixed height as anchor -->
                      <div class="h-10 w-full flex items-center justify-center mb-1">
                         <img src="{{ url_for('static', filename='flags/' + key|lower + '.svg') }}" alt="{{ value }} Flag"
-                           class="w-8 h-auto object-contain shadow-sm border border-custom-gray">
+                           class="max-w-full max-h-full w-8 h-auto object-contain shadow-sm border border-custom-gray">
                      </div>
                      <!-- text container grows to fill the rest of the card. -->
                      <div class="flex-grow flex items-center justify-center">
@@ -46,14 +47,6 @@
                   </label>
                </div>
                {% endfor %}
-            </div>
-            <div class="mt-12 p-4 bg-gray-50 border border-gray-200 rounded-lg">
-               <p class="text-sm text-gray-700">
-                  <strong class="font-bold text-gray-800">Note:</strong> For testing purposes, you may select an
-                  issuer that is not in the trusted list (Non-Trusted Issuer). However, if selected,
-                  Age Verification App will not work in the demo verifier, as it requires the issuer to be on the
-                  trusted list (Trusted Issuer).
-               </p>
             </div>
          </main>
          <!-- The Action Button Footer -->

@@ -1,0 +1,11 @@
+service_url: "https://issuer.ageverification.dev"
+log_dir: "/tmp/issuer_frontend/logs/logs.log"
+
+frontend_id: "5d725b3c-6d42-448e-8bfd-1eff1fcf152d"
+
+backend_url: "https://backend.issuer.ageverification.dev"
+oauth_url: "https://issuer.ageverification.dev/oidc"
+
+credentials_supported:
+    - "eu.europa.ec.eudi.age_verification_mdoc"
+    - "eu.europa.ec.eudi.age_verification_mdoc_passport"

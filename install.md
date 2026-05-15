@@ -4,9 +4,9 @@
 
 The Age Verification (AV) Issuer was tested with
 
-+ Python version 3.9.2
++ Python version 3.13
 
-and should only be used with Python 3.9 or 3.10.
+and should only be used with Python 3.10+.
 
 If you don't have it installed, please download it from <https://www.python.org/downloads/> and follow the [Python Developer's Guide](https://devguide.python.org/getting-started/).
 
@@ -14,24 +14,20 @@ If you don't have it installed, please download it from <https://www.python.org/
 
 The AV Issuer was tested with
 
-+ Flask v. 2.3
++ Flask v. 3.1
 
-and should only be used with Flask v. 2.3 or higher.
+and should only be used with Flask v. 3.1 or higher.
 
-To install [Flask](https://flask.palletsprojects.com/en/2.3.x/), please follow the [Installation Guide](https://flask.palletsprojects.com/en/2.3.x/installation/).
-
-## 2. NPM
-
-The AV Issuer was tested with
+To install [Flask](https://flask.palletsprojects.com/en/stable/), please follow the [Installation Guide](https://flask.palletsprojects.com/en/stable/installation/).
 
 + NPM 10.6.0
 + NodeJS v20.12.2
 
 To install [NPM](https://docs.npmjs.com/), please follow the [Installation Guide](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
 
-## 3. How to run the AV Issuer?
+## 3. How to run the AV Issuer Front End?
 
-To run the AV Issuer, please follow these simple steps (some of which may have already been completed when installing Flask) for Linux/macOS or Windows.
+To run the AV Issuer Front End, please follow these simple steps (some of which may have already been completed when installing Flask) for Linux/macOS or Windows.
 
 
 1. Clone the AV Issuer repository:
@@ -75,7 +71,20 @@ To run the AV Issuer, please follow these simple steps (some of which may have a
     pip install -r app/requirements.txt
     ```
 
-6. NPM build
+6. Setup config
+   
+   -  Copy ```.frontend_config_example.yaml``` to ```etc/issuer_config/frontend_config_example.yaml``` and modify variables.
+
+   ```shell
+   cp .frontend_config_example.yaml etc/issuer_config/frontend_config_example.yaml
+   ```
+   Configuration location can be changed using environment variable ISSUER_CONFIG_PATH
+
+7. Service Configuration
+
+   - Configure the service according to [documentation](api_docs/configuration.md)  
+
+8. NPM build
     ```shell
     npm install
     ```
@@ -84,17 +93,17 @@ To run the AV Issuer, please follow these simple steps (some of which may have a
     npm run build
     ```
 
-7. Setup secrets
-   
-   -  Copy ```app/app_config/__config_secrets.py``` to ```app/app_config/config_secrets.py``` and modify secrets.
+9. Install Authorization Server
+    - Install the service according to [Issuer Authorization Server](https://github.com/eu-digital-identity-wallet/eudi-srv-issuer-oidc-py/blob/main/install.md)
 
-8. Service Configuration
+10. Install Issuer Back End
+    - Install the service according to [Issuer Back End](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py/blob/main/install.md)
 
-   - Configure the service according to [documentation](api_docs/configuration.md)  
+11. Run the AV Issuer Front End
 
-9. Run the AV Issuer 
+    The Issuer Back End and Authorization Server should be running beforehand.
 
-    On the root directory of the clone repository, insert one of the following command lines to run the AV Issuer.
+    On the root directory of the clone repository, insert one of the following command lines to run the AV Issuer Front End.
 
     + Linux/macOS/Windows (on <http://127.0.0.1:5000> or <http://localhost:5000>)
 
@@ -107,64 +116,9 @@ To run the AV Issuer, please follow these simple steps (some of which may have a
     ```
     flask --app app run --debug
     ```
+
     
-## 4. Running your local AV Issuer over HTTPS
-
-1. Generate a self signed certificate and a private key
-   + Linux/macOS
-     
-       Example: 
-        ```
-        openssl req -x509 -out localhost.crt -keyout localhost.key -newkey rsa:2048 -nodes -sha256 -subj '/CN=localhost' -extensions EXT -config <( \
-       printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=IP.1:127.0.0.1\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")
-        ```
-
-    + Windows
-
-        Create the file localhost.conf using the following as an example:
-        ```
-        [req]
-        default_bits  = 2048
-        distinguished_name = req_distinguished_name
-        req_extensions = req_ext
-        x509_extensions = v3_req
-        prompt = no
-        [req_distinguished_name]
-        countryName = XX
-        stateOrProvinceName = N/A
-        localityName = N/A
-        organizationName = Self-signed certificate
-        commonName = 120.0.0.1: Self-signed certificate
-        [req_ext]
-        subjectAltName = @alt_names
-        [v3_req]
-        subjectAltName = @alt_names
-        [alt_names]
-        IP.1 = 127.0.0.1
-        ```
-
-        Use the configuration file above to generate the certificate and key
-        ```
-        openssl req -x509 -nodes -days 730 -newkey rsa:2048 -keyout key.pem -out cert.pem -config localhost.conf 
-        ```
-        
-2. Add certificate to environment variables
-   + Linux/macOS
-       ```
-        export REQUESTS_CA_BUNDLE="/path/to/certificate"
-       ```
-  
-   + Windows
-        ```
-        set REQUESTS_CA_BUNDLE="\path\to\certificate"
-        ```
-  
-3. Run the AV Issuer with certificate and key
-    ```
-    flask --app app run --cert=cert.pem --key=key.pem
-    ```
-    
-## 5. Make your local AV Issuer available on the Internet (optional)
+## 5. Make your local AV Issuer Front End available on the Internet (optional)
 
 If you want to make your local AV Issuer available on the Internet, we recommend to use NGINX reverse proxy and certbot (to generate an HTTPS certificate).
 
@@ -204,7 +158,7 @@ server {
 3. Restart the Nginx server
 
 
-### 5.2 Install and run certbot to get a free HTTPS certificate
+### 5.2 Install and run certbot to gef a free HTTPS certificate
 
 1. Follow the installation guide in https://certbot.eff.org
 
@@ -215,70 +169,59 @@ server {
 
 ## 6. Docker
 
-To run the AV issuer in Docker please follow these steps:
+This guide provides step-by-step instructions for deploying the **AV Issuer** service using **Docker Compose v2**.
 
-1. Install Docker following the official instructions for your operating system : <https://docs.docker.com/engine/install/>
+1. Install docker
 
-2. Download the Dockerfile at TBD 
-
-3. Build the Docker: `sudo docker build -t av-issuer .`
-
-4. Create 2 directories to be mounted:
-
-   1. First directory named `config_secrets`
-      
-      This directory will have the cert.pem and key.pem generated in [Section 4](#4-running-your-local-av-issuer-over-https)
-   
-      As well as the config_secrets.py based on this [example](app/app_config/__config_secrets.py)
+    Ensure you have Docker installed on your system. Follow the **official installation instructions** for your operating system:
+    [https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/)
 
 
-   2. Second directory named `av-issuer`, inside will be a directory `cert` and `privKey`
-      
-      The `cert` directory has the certificates of the trusted CAs in PEM format as well as the Document/Credential signer (DS) certificates in DER format
+2. Deploy Related Services
 
-      The `privKey` directory has the Document/Credential signer (DS) private keys
+To complete the full AV ecosystem, you will need to deploy the associated Authorization server and Back-end components if you haven't already.
+
+* **Back-end Installation:** Follow the guide to install the back-end component using Docker.
+    * [Back-end Deployment Guide](https://github.com/eu-digital-identity-wallet/eudi-srv-web-issuing-eudiw-py/blob/main/install.md#6-docker)
+
+* **Authorization Server Installation:** Follow the guide to install the OIDC authorization server component using Docker.
+    * [Authorization Server Deployment Guide](https://github.com/eu-digital-identity-wallet/eudi-srv-issuer-oidc-py/blob/main/install.md#6-docker)
+
+3. Configure Docker Compose
+
+    The service's container orchestration is managed by the `docker-compose.yml` file.
+
+    * **Customize the configuration:** Review and modify the local `docker-compose.yml` file to align with your specific deployment requirements (e.g., exposed ports, service names, volumes).
+    * *Reference file:* [docker-compose.yml](./docker-compose.yml)
+
+4. Set Up Configuration
+
+    Service parameters and sensitive settings are managed through a configuration file.
+
+    * **Create the configuration file:** We recommend copying the example file to create your local configuration.
+
+    * **Update variables:** Edit the newly created `frontend_config_example.yaml` file with your specific settings and credentials.
+        * *Reference example:* [frontend_config_example.yaml](frontend_config_example.yaml)
 
 
-    Example:
-   
+5. Pull the Docker Image
 
-    ```bash
-    docker-issuer
-    ├── Dockerfile
-    ├── config_secrets
-    │   ├── config_secrets.py
-    │   ├── cert.pem
-    │   └── key.pem
-    └── av-issuer
-        ├── cert
-        │   ├── AV-DS-0001_UT_cert.der
-        │   └── AVIssuerCAUT01.pem
-        └── privKey
-            └── AV-DS-0001_UT.pem
+    ```
+    docker compose pull
     ```
 
-5. Run Docker
+6. Run the 
 
-    If running a basic configuration without EIDAS node or Dynamic presentation, their respective variables can be removed from the run command below.
-    
-    ```bash
-    sudo docker run -d \
-    --name av-issuer \
-    -e SERVICE_URL="https://your.service.url/" \
-    -e EIDAS_NODE_URL="https://your.eidas.node.url/" \
-    -e DYNAMIC_PRESENTATION_URL="https://your.dynamic.presentation.url/" \
-    -v ./config_secrets:/root/secrets \
-    -v ./av-issuer:/etc/av/av-issuer \
-    -p 5000:5000 \
-    av-issuer
+    Start the AV Issuer backend in detached mode (runs in the background):
+
+    ```
+    docker compose up -d
     ```
 
-5. Docker logs
+7. Check Logs
 
-    Issuer logs in real time: `sudo docker logs -f av-issuer`
-    All logs: `sudo docker logs av-issuer`
-
-6. Stopping Docker Issuer
-   `sudo docker stop av-issuer`
-
+    To confirm the service is running correctly and to monitor its output in real-time for troubleshooting, use the following command:
+    ```
+    docker compose logs -f
+    ```
 

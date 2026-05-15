@@ -26,185 +26,60 @@ import copy
 import json
 import os
 import sys
+import logging
+import yaml
+import requests
 
 sys.path.append(os.path.dirname(__file__))
 
-from flask import Flask, render_template, request, send_from_directory
+from dotenv import load_dotenv
+
+load_dotenv()
+
+from flask import Flask, jsonify, render_template, send_from_directory
 from flask_session import Session
 from flask_cors import CORS
 from werkzeug.debug import *
 from werkzeug.exceptions import HTTPException
-from idpyoidc.configure import Configuration
-from idpyoidc.configure import create_from_config_file
-from idpyoidc.server.configure import OPConfiguration
-from idpyoidc.server import Server
-from urllib.parse import urlparse
-from pycose.keys import EC2Key
+from typing import Dict, Any, List, Union, cast
 
-from cryptography.hazmat.backends import default_backend
-from cryptography import x509
-from app_config.config_service import ConfService as cfgserv
-
+from app.app_config.logging_config import configure_logging
 
 # Log
-from .app_config.config_service import ConfService as log
+
+oidc_metadata: Dict[str, Any] = {}
+openid_metadata: Dict[str, Any] = {}
+oauth_metadata: Dict[str, Any] = {}
+signed_metadata: str = None
 
 
-oidc_metadata = {}
-oidc_metadata_clean = {}
-openid_metadata = {}
-oauth_metadata = {}
-trusted_CAs = {}
-
-
-def remove_keys(obj, keys_to_remove):
-    if isinstance(obj, dict):
-        new_obj = {
-            k: remove_keys(v, keys_to_remove)
-            for k, v in obj.items()
-            if k not in keys_to_remove
-        }
-        return new_obj if new_obj else None
-    elif isinstance(obj, list):
-        new_list = [remove_keys(item, keys_to_remove) for item in obj]
-        new_list = [item for item in new_list if item is not None]
-        return new_list if new_list else None
-    else:
-        return obj
-
-
-def setup_metadata():
-    global oidc_metadata
-    global oidc_metadata_clean
-    global openid_metadata
-    global oauth_metadata
-
-    try:
-        credentials_supported = {}
-        dir_path = os.path.dirname(os.path.realpath(__file__))
-
-        with open(
-            dir_path + "/metadata_config/openid-configuration.json"
-        ) as openid_metadata:
-            openid_metadata = json.load(openid_metadata)
-
-        with open(
-            dir_path + "/metadata_config/oauth-authorization-server.json"
-        ) as oauth_metadata:
-            oauth_metadata = json.load(oauth_metadata)
-
-        with open(dir_path + "/metadata_config/metadata_config.json") as metadata:
-            oidc_metadata = json.load(metadata)
-            oidc_metadata_clean = copy.deepcopy(oidc_metadata)
-
-        for file in os.listdir(dir_path + "/metadata_config/credentials_supported/"):
-            if file.endswith("json"):
-                json_path = os.path.join(
-                    dir_path + "/metadata_config/credentials_supported/", file
-                )
-                with open(json_path, encoding="utf-8") as json_file:
-                    credential = json.load(json_file)
-                    credentials_supported.update(credential)
-
-    except FileNotFoundError as e:
-        cfgserv.app_logger.exception(f"Metadata Error: file not found. \n{e}")
-    except json.JSONDecodeError as e:
-        cfgserv.app_logger.exception(
-            f"Metadata Error: Metadata Unable to decode JSON. \n{e}"
-        )
-    except Exception as e:
-        cfgserv.app_logger.exception(
-            f"Metadata Error: An unexpected error occurred. \n{e}"
-        )
-
-    oidc_metadata["credential_configurations_supported"] = credentials_supported
-
-    oidc_metadata_clean["credential_configurations_supported"] = remove_keys(
-        copy.deepcopy(credentials_supported),
-        {"issuer_conditions", "issuer_config", "overall_issuer_conditions", "source"},
+def _load_config() -> dict:
+    config_path = os.environ.get(
+        "ISSUER_CONFIG_PATH", "/etc/issuer_config/frontend_config.yaml"
     )
-
-
-setup_metadata()
-
-
-def setup_trusted_CAs():
-    global trusted_CAs
-
     try:
-        ec_keys = {}
-        for file in os.listdir(cfgserv.trusted_CAs_path):
-            if file.endswith("pem"):
-                CA_path = os.path.join(cfgserv.trusted_CAs_path, file)
+        with open(config_path, "r") as f:
+            config = yaml.safe_load(f)
+        if not config:
+            raise RuntimeError(f"Config file is empty: {config_path}")
+    except FileNotFoundError:
+        raise RuntimeError(f"Config file not found: {config_path}")
+    except yaml.YAMLError as e:
+        raise RuntimeError(f"Invalid YAML in config: {e}")
 
-                with open(CA_path) as pem_file:
-
-                    pem_data = pem_file.read()
-
-                    pem_data = pem_data.encode()
-
-                    certificate = x509.load_pem_x509_certificate(
-                        pem_data, default_backend()
-                    )
-
-                    public_key = certificate.public_key()
-
-                    issuer = certificate.issuer
-
-                    not_valid_before = certificate.not_valid_before
-
-                    not_valid_after = certificate.not_valid_after
-
-                    x = public_key.public_numbers().x.to_bytes(
-                        (public_key.public_numbers().x.bit_length() + 7)
-                        // 8,  # Number of bytes needed
-                        "big",  # Byte order
-                    )
-
-                    y = public_key.public_numbers().y.to_bytes(
-                        (public_key.public_numbers().y.bit_length() + 7)
-                        // 8,  # Number of bytes needed
-                        "big",  # Byte order
-                    )
-
-                    ec_key = EC2Key(
-                        x=x, y=y, crv=1
-                    )  # SECP256R1 curve is equivalent to P-256
-
-                    ec_keys.update(
-                        {
-                            issuer: {
-                                "certificate": certificate,
-                                "public_key": public_key,
-                                "not_valid_before": not_valid_before,
-                                "not_valid_after": not_valid_after,
-                                "ec_key": ec_key,
-                            }
-                        }
-                    )
-
-    except FileNotFoundError as e:
-        cfgserv.app_logger.exception(f"TrustedCA Error: file not found.\n {e}")
-    except json.JSONDecodeError as e:
-        cfgserv.app_logger.exception(
-            f"TrustedCA Error: Metadata Unable to decode JSON.\n {e}"
-        )
-    except Exception as e:
-        cfgserv.app_logger.exception(
-            f"TrustedCA Error: An unexpected error occurred.\n {e}"
-        )
-
-    trusted_CAs = ec_keys
+    return config
 
 
-setup_trusted_CAs()
+CONFIGURATION = _load_config()
+
+logger = logging.getLogger(__name__)
 
 
 def handle_exception(e):
     # pass through HTTP errors
     if isinstance(e, HTTPException):
         return e
-    cfgserv.app_logger.exception("- WARN - Error 500")
+    logger.exception("- WARN - Error 500")
     # now you're handling non-HTTP exceptions only
     return (
         render_template(
@@ -217,7 +92,7 @@ def handle_exception(e):
 
 
 def page_not_found(e):
-    cfgserv.app_logger.exception("- WARN - Error 404")
+    logger.exception("- WARN - Error 404")
     return (
         render_template(
             "misc/500.html",
@@ -228,6 +103,9 @@ def page_not_found(e):
     )
 
 
+from typing import Optional
+
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -235,19 +113,27 @@ def create_app(test_config=None):
     app.register_error_handler(Exception, handle_exception)
     app.register_error_handler(404, page_not_found)
 
+    configure_logging(app, CONFIGURATION)
+
+    app.logger.info("Running initialization setups...")
+    setup_metadata()
+
     @app.route("/", methods=["GET"])
     def initial_page():
         return render_template(
-            "misc/initial_page.html", oidc=cfgserv.oidc, service_url=cfgserv.service_url
+            "misc/initial_page.html",
+            oidc=f"{CONFIGURATION['service_url']}/.well-known/openid-credential-issuer",
+            service_url=CONFIGURATION["service_url"],
+            revocation_url=f"{CONFIGURATION['backend_url']}/revocation/revocation_choice",
         )
 
     @app.route("/favicon.ico")
     def favicon():
         return send_from_directory("static/images", "favicon.ico")
 
-    @app.route("/ic-logo.png")
+    @app.route("/ic-logo.svg")
     def logo():
-        return send_from_directory("static/images", "ic-logo.png")
+        return send_from_directory("static/images", "ic-logo.svg")
 
     app.config.from_mapping(SECRET_KEY="dev")
 
@@ -264,27 +150,11 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    # a simple page that says hello
-    # @app.route('/hello')
-    # def hello():
-    #    return 'Hello, World!'
-
     # register blueprint for the /pid route
-    from . import (
-        route_eidasnode,
-        route_formatter,
-        route_oidc,
-        route_dynamic,
-        route_oid4vp,
-        preauthorization,
-    )
+    from . import frontend, auth_redirect
 
-    app.register_blueprint(route_eidasnode.eidasnode)
-    app.register_blueprint(route_formatter.formatter)
-    app.register_blueprint(route_oidc.oidc)
-    app.register_blueprint(route_oid4vp.oid4vp)
-    app.register_blueprint(route_dynamic.dynamic)
-    app.register_blueprint(preauthorization.preauth)
+    app.register_blueprint(frontend.frontend)
+    app.register_blueprint(auth_redirect.authorization_endpoint)
 
     # config session
     app.config["SESSION_FILE_THRESHOLD"] = 50
@@ -296,38 +166,153 @@ def create_app(test_config=None):
     # CORS is a mechanism implemented by browsers to block requests from domains other than the server's one.
     CORS(app, supports_credentials=True)
 
-    cfgserv.app_logger.info(" - DEBUG - FLASK started")
-
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-
-    config = create_from_config_file(
-        Configuration,
-        entity_conf=[
-            {"class": OPConfiguration, "attr": "op", "path": ["op", "server_info"]}
-        ],
-        filename=dir_path + "/app_config/oid_config.py",
-        base_path=dir_path,
-    )
-
-    app.srv_config = config.op
-
-    server = Server(config.op, cwd=dir_path)
-
-    for endp in server.endpoint.values():
-        p = urlparse(endp.endpoint_path)
-        _vpath = p.path.split("/")
-        if _vpath[0] == "":
-            endp.vpath = _vpath[1:]
-        else:
-            endp.vpath = _vpath
-
-    app.server = server
+    app.logger.info(" - DEBUG - FLASK started")
 
     return app
 
 
-#
-# Usage examples:
-# flask --app app run --debug
-# flask --app app run --debug --cert=app/certs/certHttps.pem --key=app/certs/key.pem --host=127.0.0.1 --port=4430
-#
+def replace_domain(
+    obj: Union[Dict[str, Any], List[Any], str, Any], old: str, new: str
+) -> Union[Dict[str, Any], List[Any], str, Any]:
+    if isinstance(obj, dict):
+        return {k: replace_domain(v, old, new) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [replace_domain(i, old, new) for i in obj]
+    elif isinstance(obj, str):
+        return obj.replace(old, new)
+    else:
+        return obj
+
+
+def setup_metadata():
+    global oidc_metadata
+    global oidc_metadata_clean
+    global openid_metadata
+    global oauth_metadata
+    global signed_metadata
+
+    credentials_supported: Dict[str, Any] = {}
+
+    try:
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+
+        with open(dir_path + "/metadata_config/openid-configuration.json") as f:
+            openid_metadata = json.load(f)
+
+        with open(dir_path + "/metadata_config/oauth-authorization-server.json") as f:
+            oauth_metadata = json.load(f)
+
+        with open(dir_path + "/metadata_config/metadata_config.json") as metadata:
+            oidc_metadata = json.load(metadata)
+            oidc_metadata_clean = copy.deepcopy(oidc_metadata)
+
+        metadata_endpoint = (
+            f"{CONFIGURATION['backend_url']}/.well-known/openid-credential-issuer"
+        )
+
+        try:
+            response = requests.get(metadata_endpoint)
+            response.raise_for_status()
+
+            data = response.json()
+
+            credentials_supported = data.get("credential_configurations_supported", {})
+
+            credential_request_encryption = data.get("credential_request_encryption")
+            if credential_request_encryption:
+                logger.info(
+                    "credential_request_encryption fetched from backend: %s",
+                    json.dumps(credential_request_encryption, indent=2),
+                )
+            else:
+                logger.warning(
+                    "credential_request_encryption not found in backend metadata"
+                )
+
+            if (
+                CONFIGURATION["credentials_supported"]
+                and CONFIGURATION["credentials_supported"] != ["*"]
+                and CONFIGURATION["credentials_supported"] != "*"
+            ):
+                allowed_credentials = set(CONFIGURATION["credentials_supported"])
+                credentials_supported = {
+                    k: v
+                    for k, v in credentials_supported.items()
+                    if k in allowed_credentials
+                }
+
+        except Exception:
+            for file in os.listdir(
+                dir_path + "/metadata_config/credentials_supported/"
+            ):
+                if file.endswith("json"):
+                    json_path = os.path.join(
+                        dir_path + "/metadata_config/credentials_supported/", file
+                    )
+                    with open(json_path, encoding="utf-8") as json_file:
+                        credential = json.load(json_file)
+                        credentials_supported.update(credential)
+
+    except FileNotFoundError as e:
+        logger.exception(f"Metadata Error: file not found. \n{e}")
+        raise
+    except json.JSONDecodeError as e:
+        logger.exception(f"Metadata Error: Metadata Unable to decode JSON. \n{e}")
+        raise
+    except Exception as e:
+        logger.exception(f"Metadata Error: An unexpected error occurred. \n{e}")
+        raise
+
+    oidc_metadata["credential_configurations_supported"] = credentials_supported
+
+    if credential_request_encryption:
+        oidc_metadata["credential_request_encryption"] = credential_request_encryption
+        logger.info("credential_request_encryption set on oidc_metadata")
+
+    old_domain = oidc_metadata["credential_issuer"]
+    new_domain = CONFIGURATION["backend_url"]
+
+    oidc_domain = CONFIGURATION["oauth_url"]
+
+    openid_metadata = cast(
+        Dict[str, Any],
+        replace_domain(openid_metadata, f"{old_domain}/oidc", oidc_domain),
+    )
+
+    oauth_metadata = cast(
+        Dict[str, Any], replace_domain(oauth_metadata, old_domain, new_domain)
+    )
+
+    oidc_metadata = cast(
+        Dict[str, Any], replace_domain(oidc_metadata, old_domain, new_domain)
+    )
+
+    openid_metadata["issuer"] = CONFIGURATION["service_url"]
+    openid_metadata["pushed_authorization_request_endpoint"] = (
+        f"{CONFIGURATION['service_url']}/pushed_authorization"
+    )
+    oidc_metadata["credential_issuer"] = CONFIGURATION["service_url"]
+    oidc_metadata["display"][0]["logo"][
+        "uri"
+    ] = f"{CONFIGURATION['service_url']}/ic-logo.svg"
+
+    metadata_signing_endpoint = (
+        f"{CONFIGURATION['backend_url']}/metadata/metadata_signer"
+    )
+
+    payload = {
+        "metadata": oidc_metadata,
+        "issuer_frontend_id": CONFIGURATION["frontend_id"],
+        "iss": CONFIGURATION["service_url"],
+    }
+
+    response = requests.post(
+        metadata_signing_endpoint,
+        json=payload,
+        headers={"Content-Type": "application/json"},
+        timeout=10,
+    )
+
+    response.raise_for_status()
+
+    signed_metadata = response.json()["signed_metadata"]

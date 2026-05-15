@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revocation Guide</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="slideshow-container">
+        
+        <h1>Revocation Guide</h1>
+        
+        <button class="navigation" onclick="previousSlide()">Previous Step</button>
+        <button class="navigation" onclick="nextSlide()">Next Step</button>
+        <button class="navigation" onclick="goHome()">Home</button>
+        <!-- Slide 1 -->
+        <div class="slides active">
+            <p>In order to perform this revocation operation, it is necessary to have a <strong> device with internet access and the EUDI Wallet app installed</strong>, such as a smartphone.</p>
+            <p>This is the <strong>first page</strong> where the user can choose which credentials they want to revoke.</p>
+            <p><strong>On this first page, you can observe the different credentials that can be revoked.</strong></p>
+            <div class="text">First Page</div>
+            <img src="guides_images/revocation/revoke_1.png" alt="Step 1" style="width: 60%; display: block; margin: auto;">
+            <img src="guides_images/revocation/revoke_2.png" alt="Step 1" style="width: 60%; display: block; margin: auto;">
+            <img src="guides_images/revocation/revoke_3.png" alt="Step 1" style="width: 60%; display: block; margin: auto;">
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slides">
+            <p>To get started, simply <strong> select the desired credentials</strong>.</p>
+            <p>For this example, a <strong> PID in the mdoc format will be selected.</strong></p>
+            <p>Finally, just click the <strong>"Submit" button to proceed.</strong></p>
+            <div class="text">Step 1: Select the credentials you want to revoke.</div>
+            <img src="guides_images/revocation/revoke_4.png" alt="Step 2" style="width: 60%; display: block; margin: auto;">
+            <img src="guides_images/revocation/revoke_5.png" alt="Step 2" style="width: 60%; display: block; margin: auto;">
+            <img src="guides_images/revocation/revoke_6.png" alt="Step 2" style="width: 60%; display: block; margin: auto;">
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slides">
+            <p>A <strong> QR code will now be generated.</strong></p>
+            <p>If you are already using a <strong> device with the EUDI Wallet app</strong>, there is <strong>no need to scan the QR code</strong>. Simply press the "Request" button</strong>, and you will be redirected directly to the app.</p>
+            <p>If you are <strong>not on a device with the EUDI Wallet app</strong>, such as a computer, you will need to <strong>scan the QR code</strong> with a device that has internet access and the EUDI Wallet app. After scanning, you will be <strong>redirected to the app.</strong></p>
+            <div class="text">Step 2: QR Code Scanning</div>
+            <img src="guides_images/revocation/revoke_7.png" alt="Step 3" style="width: 60%; display: block; margin: auto;">
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slides">
+            <p>After being redirected to the EUDI Wallet app, you will see what you need to share your PID, this step acts as user permission and authentication.</p>
+            <p>To proceed, simply click on the <strong> "Share" button.</strong>.</p>
+            <div class="text">Step 3: Permission and Authentication</div>
+            <img src="guides_images/revocation/revoke_8.png" alt="Step 4" style="width: 60%; display: block; margin: auto;">
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slides">
+            <p>Enter your PIN to continue with the previous step.</p>
+            <div class="text">Step 5: Enter PIN </div>
+            <img src="guides_images/revocation/revoke_9.png" alt="Step 6" style="width: 60%; display: block; margin: auto;">
+        </div>
+        
+        <!-- Slide 6 -->
+        <div class="slides">
+            <p>If everything goes well in the previous two steps, this transaction will be successful and this success page will be displayed..</p>
+            <p>To proceed, simply <strong>click "Close."</strong></p>
+            <div class="text">Step 6: Shared successfully </div>
+            <img src="guides_images/revocation/revoke_10.png" alt="Step 7" style="width: 60%; display: block; margin: auto;">
+        </div>
+        
+        <!-- Slide  7 -->
+        <div class="slides">
+            <p>You can now continue with the process of revoking your credentials.</p>
+            <p>On this page, you can see the credentials you want to revoke, and if everything is correct, simply <strong>  click on "Authorize Revocation" </strong> to complete the revocation process.</p>
+            <div class="text">Step 7: Authorize Revocation </div>
+            <img src="guides_images/revocation/revoke_11.png" alt="Step 8" style="width: 60%; display: block; margin: auto;">
+        </div>
+        
+        <!-- Slide 8 -->
+        <div class="slides">
+            <p>Finally, if the entire process goes well, this page will be displayed, showing that the <strong>selected credential has been successfully revoked</strong>, and you can return to the home page.</p>
+            <div class="text">Step 8: Revocation successfully </div>
+            <img src="guides_images/revocation/revoke_12.png" alt="Step 9" style="width: 60%; display: block; margin: auto;">
+        </div>
+
+    </div>
+
+    <!-- Link para o script JS externo -->
+    <script src="script.js"></script>
+
+</body>
+</html>

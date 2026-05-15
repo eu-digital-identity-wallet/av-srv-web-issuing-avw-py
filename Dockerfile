@@ -1,48 +1,50 @@
-FROM ubuntu:22.04
+# ── Stage 1: Node build ───────────────────────────────────────────────────────
+FROM node:lts-slim AS node-builder
 
-ENV DEBIAN_FRONTEND=noninteractive
+WORKDIR /build
 
-RUN apt-get update && apt-get install -y \
-    python3.10 \
-    python3.10-venv \
-    python3.10-dev \
-    python3-pip \
-    git \
-    gcc \
+COPY package*.json ./
+COPY tailwind.config.* ./
+COPY postcss.config.* ./
+COPY assets/ ./assets/
+COPY app/ ./app/
+
+RUN npm install
+RUN npm run build
+
+# ── Stage 2: Python deps ──────────────────────────────────────────────────────
+FROM python:3.13-slim AS python-builder
+
+WORKDIR /build
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
+    gcc \
+    libffi-dev \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /tmp/log_dev
-RUN chmod -R 755 /tmp/log_dev
+COPY app/requirements.txt .
+RUN pip install --upgrade pip \
+ && pip install --no-cache-dir --prefix=/install -r requirements.txt
 
+# ── Stage 3: runtime ──────────────────────────────────────────────────────────
+FROM python:3.13-slim
 
-RUN git clone https://github.com/eu-digital-identity-wallet/av-srv-web-issuing-avw-py.git /root/eudi-srv-web-issuing-eudiw-py
+WORKDIR /app
 
-WORKDIR /root/av-srv-web-issuing-eudiw-py
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libffi8 \
+    libssl3 \
+    ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
-RUN python3 -m venv venv
+COPY --from=python-builder /install /usr/local
+COPY --from=node-builder /build/app/static/css/tailwind.css ./app/static/css/tailwind.css
+COPY . .
 
-RUN /root/av-srv-web-issuing-eudiw-py/venv/bin/pip install --no-cache-dir -r app/requirements.txt
+ENV FLASK_APP=app
 
 EXPOSE 5000
 
-ENV FLASK_APP=app\
-    FLASK_RUN_PORT=5000\
-    FLASK_RUN_HOST=0.0.0.0\
-    SERVICE_URL="https://127.0.0.1:5000/" \
-    EIDAS_NODE_URL="https://preprod.issuer.eudiw.dev/EidasNode/"\
-    # TODO we need to fix this
-    # DYNAMIC_PRESENTATION_URL="https://dev.verifier-backend.eudiw.dev/ui/presentations/"
-    DYNAMIC_PRESENTATION_URL=""
-
-CMD ["/bin/bash", "-c", "\
-cp /root/secrets/config_secrets.py /root/av-srv-web-issuing-eudiw-py/app/app_config/ && \
-if [[ -f /root/secrets/cert.pem && -f /root/secrets/key.pem ]]; then \
-    echo 'Starting Flask with TLS'; \
-    export REQUESTS_CA_BUNDLE=/root/secrets/cert.pem && /root/av-srv-web-issuing-eudiw-py/venv/bin/flask run --cert=/root/secrets/cert.pem --key=/root/secrets/key.pem; \
-else \
-    echo 'Starting Flask without TLS'; \
-    /root/av-srv-web-issuing-eudiw-py/venv/bin/flask run; \
-fi"]
-
+CMD ["flask", "run", "--host=0.0.0.0"]
